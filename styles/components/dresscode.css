@@ -1,0 +1,58 @@
+.dresscode {
+  padding: 6rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dresscode__container {
+
+  max-width: 800px;
+  margin: auto;
+}
+
+.dresscode__tag--icons {
+  display: flex;
+  justify-content: center;
+}
+
+.dresscode__tag {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.dresscode__tag--icon-women {
+  height: 48px;
+  width: 48px; 
+  margin-right: 24px;
+}
+
+.dresscode__tag--icon-man {
+  height: 48px;
+  width: 48px;
+  margin-left: 24px; 
+}
+
+.dresscode__title {
+  font-size: 2.5rem;
+  margin: 1rem 0 3rem;
+}
+
+.dresscode__card {
+  background: var(--color-surface);
+  padding: 3rem 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+.dresscode__type {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.dresscode__description {
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}

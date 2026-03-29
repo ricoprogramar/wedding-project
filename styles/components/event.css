@@ -1,0 +1,150 @@
+.event {
+  padding: 6rem 1rem;
+  text-align: center;
+}
+
+.event__container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.event__tag {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.event__title {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+}
+
+.event__divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.event__line {
+  width: 60px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.event__icon {
+  color: var(--color-primary);
+}
+
+.event__date {
+  color: var(--color-primary);
+  margin-top: 0.5rem;
+}
+
+.event__content {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.event__image img {
+  width: 180px;
+}
+
+/* Card */
+
+.event-card {
+  background: var(--color-surface);
+  padding: 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.event-card__title {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.event-card__time {
+  margin: 1rem auto;
+  background: #2a2a2e;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.event-card__place {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.event-card__description {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.event-card__actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.event-card__actions a {
+  text-decoration: none;
+}
+
+/* ========================= */
+/* Mobile (override) */
+/* ========================= */
+@media (max-width: 767px) {
+  .event {
+    padding: 4rem 1rem;
+  }
+
+  .event__content {
+    grid-template-columns: 1fr; /* 🔑 stack */
+    gap: 2rem;
+  }
+
+  /* Orden visual correcto */
+  .event-card:nth-child(1) {
+    order: 1;
+  }
+
+  .event__image {
+    order: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  .event-card:nth-child(3) {
+    order: 3;
+  }
+
+  /* Imagen más proporcionada */
+  .event__image img {
+    width: 140px;
+  }
+
+  /* Tipografía */
+  .event__title {
+    font-size: 2rem;
+  }
+
+  .event__tag {
+    font-size: 1.2rem;
+  }
+
+  /* Botones más cómodos */
+  .event-card__actions {
+    gap: 1rem;
+  }
+
+  .event-card__actions a {
+    width: 100%;
+  }
+}

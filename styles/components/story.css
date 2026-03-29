@@ -1,0 +1,53 @@
+.story {
+  padding: 6rem 1rem;
+  text-align: center;
+}
+
+.story__container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.story__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.story__line {
+  width: 60px;
+  height: 1px;
+  background-color: var(--color-primary);
+}
+
+.story__icon {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.story__text {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.story__highlight {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 1.5rem 0;
+}
+
+.story__quote {
+  margin: 2rem 0;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+
+.story__verse {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,37 @@
+.dresscode-detail {
+  padding: 4rem 1rem;
+}
+
+.dresscode-detail__container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.dresscode-detail h1 {
+  margin-bottom: 1.5rem;
+}
+
+.dresscode-detail h2 {
+  margin-top: 2rem;
+  color: var(--color-primary);
+}
+
+.dresscode-detail p,
+.dresscode-detail li {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.dresscode-detail ul {
+  padding-left: 1.5rem;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boda</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./styles/variables.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/components/navbar.css" />
+    <link rel="stylesheet" href="./styles/components/hero.css" />
+    <link rel="stylesheet" href="./styles/components/buttons.css" />
+    <link rel="stylesheet" href="./styles/components/story.css" />
+    <link rel="stylesheet" href="./styles/components/event.css" />
+    <link rel="stylesheet" href="./styles/components/countdown.css" />
+    <link rel="stylesheet" href="./styles/components/tips.css" />
+    <link rel="stylesheet" href="./styles/components/dresscode.css" />
+    <link rel="stylesheet" href="./styles/components/gift.css" />
+    <link rel="stylesheet" href="./styles/components/footer.css" />
+    <link rel="stylesheet" href="./styles/components/modal.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="navbar__container">
+        <div class="navbar__logo">E &amp; A</div>
+
+        <nav class="navbar__menu" id="navbarMenu">
+          <a href="#inicio-hero" class="navbar__link">Inicio</a>
+          <a href="#evento" class="navbar__link">Evento</a>
+          <a href="#countdown" class="navbar__link">Cuenta regresiva</a>
+          <a href="#tips" class="navbar__link">Tips</a>
+          <a href="#vestimenta" class="navbar__link">Vestimenta</a>
+          <a href="#regalos" class="navbar__link">Regalos</a>
+          <a href="#" class="navbar__link">Fotos</a>
+        </nav>
+
+        <button class="btn btn--primary navbar__cta btn-confirm">
+          Confirmar asistencia
+        </button>
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar__toggle" id="navbarToggle">☰</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <main class="hero" id="inicio-hero">
+      <div class="hero__container">
+        <div class="hero__content">
+          <span class="hero__tag"> Invitación de boda </span>
+
+          <h1 class="hero__title">Únete a nuestra historia</h1>
+
+          <p class="hero__description">
+            Celebra con nosotros el día en que unimos nuestras vidas por
+            siempre.
+          </p>
+
+          <p class="hero__date">16 de mayo de 2026</p>
+
+          <div class="hero__actions">
+            <button class="btn btn--primary btn-confirm">
+              Confirmar asistencia
+            </button>
+
+            <button class="btn btn--outline" id="goToInformation">
+              Más información
+            </button>
+          </div>
+        </div>
+
+        <div class="hero__image">
+          <img id="heroCarouselImage" alt="Pareja" />
+        </div>
+      </div>
+    </main>
+
+    <!-- Sección de historia -->
+    <section class="story" id="inicio-story">
+      <div class="story__container">
+        <div class="story__divider">
+          <span class="story__line"></span>
+          <span class="story__icon">❤</span>
+          <span class="story__line"></span>
+        </div>
+
+        <p class="story__text">
+          Con el corazón lleno de amor y alegría, queremos compartir con ustedes
+          la noticia más especial de nuestras vidas:
+        </p>
+
+        <p class="story__highlight">¡Nos casamos!</p>
+
+        <p class="story__text">
+          Desde que nos conocimos, hemos vivido momentos mágicos y aventuras que
+          nos han hecho crecer como pareja. Nuestro amor sigue sorprendiéndonos
+          y fortaleciéndonos cada día.
+        </p>
+
+        <blockquote class="story__quote">
+          "El amor es paciente, es bondadoso. El amor no es envidioso ni
+          jactancioso ni orgulloso. No se comporta con rudeza, no es egoísta, no
+          se enoja fácilmente, no guarda rencor."
+        </blockquote>
+
+        <p class="story__verse">1 Corintios 13:4-5</p>
+
+        <div class="story__divider">
+          <span class="story__line"></span>
+          <span class="story__icon">❤</span>
+          <span class="story__line"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evento -->
+
+    <section class="event" id="evento">
+      <div class="event__container">
+        <div class="event__header">
+          <span class="event__tag">Ceremonia & Fiesta</span>
+          <h2 class="event__title">Nuestra boda</h2>
+
+          <div class="event__divider">
+            <span class="event__line"></span>
+            <span class="event__icon">❤</span>
+            <span class="event__line"></span>
+          </div>
+
+          <p class="event__date">16 de mayo de 2026</p>
+        </div>
+
+        <div class="event__content">
+          <!-- Ceremonia y Fiesta-->
+
+          <div class="event-card">
+            <h3 class="event-card__title">Ceremonia</h3>
+
+            <div class="event-card__time">5:00 p.m.</div>
+
+            <p class="event-card__place">
+              Basilica Menor de Nuestra Señora de Las Victorias (Santa Rosa de
+              Cabal)
+            </p>
+
+            <p class="event-card__description">
+              Únete a nosotros para celebrar nuestro amor y compromiso en un
+              entorno sagrado, lleno de bendiciones y alegría. Será un momento
+              especial.
+            </p>
+
+            <div class="event-card__actions">
+              <a
+                href="https://www.google.com/maps?q=4.864688, -75.621145"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--primary"
+              >
+                Abrir mapa
+              </a>
+
+              <a
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Edwar+y+Adriana&dates=20260516T220000Z/20260516T230000Z&details=Ceremonia+y+celebración&location=Basilica+Menor+de+Nuestra+Señora+de+Las+Victorias+Santa+Rosa+de+Cabal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline"
+              >
+                Agregar a Google Calendar
+              </a>
+            </div>
+          </div>
+
+          <!-- Imagen central -->
+          <div class="event__image">
+            <img src="./assets/images/7.jpg" alt="Boda" />
+          </div>
+
+          <!-- Fiesta -->
+          <div class="event-card">
+            <h3 class="event-card__title">Fiesta</h3>
+
+            <div class="event-card__time">7:30 p.m.</div>
+
+            <p class="event-card__place">
+              Salón Hotel Don Julio - (Finca Hotel Don Julio, Cl. Don Julio,
+              Santa Rosa de Cabal, Risaralda)
+            </p>
+
+            <p class="event-card__description">
+              Acompáñanos en una velada encantadora llena de melodías vibrantes
+              y alegría contagiosa para festejar nuestra unión eterna. ¡Noche
+              inolvidable!
+            </p>
+
+            <div class="event-card__actions">
+              <a
+                href="https://www.google.com/maps?q=4.862086, -75.611884"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--primary"
+              >
+                Abrir mapa
+              </a>
+
+              <a
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Edwar+y+Adriana&dates=20260516T123000Z/20260517T070000Z&details=Ceremonia+y+celebración&location=Basilica+Menor+de+Nuestra+Señora+de+Las+Victorias+Santa+Rosa+de+Cabal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn--outline"
+              >
+                Agregar a Google Calendar
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cuenta regresiva -->
+
+    <section class="countdown" id="countdown">
+      <div class="countdown__container">
+        <h2 class="countdown__title">Te esperamos en</h2>
+
+        <div class="countdown__grid">
+          <div class="countdown__item">
+            <span id="days">00</span>
+            <p>Días</p>
+          </div>
+
+          <div class="countdown__divider"></div>
+
+          <div class="countdown__item">
+            <span id="hours">00</span>
+            <p>Horas</p>
+          </div>
+
+          <div class="countdown__divider"></div>
+
+          <div class="countdown__item">
+            <span id="minutes">00</span>
+            <p>Minutos</p>
+          </div>
+
+          <div class="countdown__divider"></div>
+
+          <div class="countdown__item">
+            <span id="seconds">00</span>
+            <p>Segundos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Información Importante -->
+
+    <section class="tips" id="tips">
+      <div class="tips__container">
+        <h2 class="tips__title">Información importante</h2>
+
+        <div class="tips__card">
+          
+          <img
+            class="tips__icon"
+            src="./assets/icons/tips.png"
+            alt="Vestido dama"
+          />
+
+          <h3 class="tips__subtitle">Notas</h3>
+
+          <p class="tips__description">
+            Información útil para que disfrutes al máximo de nuestra
+            celebración.
+          </p>
+
+          <button class="btn btn--primary" id="open-tips">
+            → Ver más información
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vestimenta -->
+
+    <section class="dresscode" id="vestimenta">
+      <div class="dresscode__container">
+        <div class="dresscode__tag dresscode__tag--icons">
+          <img
+            class="dresscode__tag dresscode__tag--icon-women"
+            src="./assets/icons/dress.png"
+            alt="Vestido dama"
+          />
+
+          <span>Código de vestimenta</span>
+
+          <img
+            class="dresscode__tag dresscode__tag--icon-man"
+            src="./assets/icons/shirt.png"
+            alt="Vestido dama"
+          />
+          </div>
+        </div> <!--dresscode__tag--icons -->
+
+        <!-- <span class="dresscode__tag"> Código de vestimenta </span> -->
+
+        <h2 class="dresscode__title">Elegancia y estilo</h2>
+
+        <div class="dresscode__card">
+          <h3 class="dresscode__type">Formal</h3>
+
+          <p class="dresscode__description">
+            Para hacer de este día algo especial, te sugerimos vestir elegante
+            tanto para la ceremonia como para la celebración.
+          </p>
+
+          <button class="btn btn--primary" id="open-dresscode">
+            Ver guía completa →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Regalos -->
+
+    <section class="gift" id="regalos">
+      <div class="gift__container">
+        <div class="gift__tag">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#FFFFFF"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-gift"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M3 9a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1l0 -2"
+            />
+            <path d="M12 8l0 13" />
+            <path d="M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7" />
+            <path
+              d="M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5"
+            />
+          </svg>
+
+          <span>Regalo de bodas</span>
+        </div>
+
+        <!-- <span class="gift__tag"> Regalo de bodas </span> -->
+
+        <h2 class="gift__title">Lluvia de sobres</h2>
+
+        <div class="gift__card">
+          <p class="gift__description">
+            Tu presencia es el mayor regalo que podemos recibir. Si deseas hacer
+            un gesto especial, te invitamos a contribuir a nuestra luna de miel
+            a través de la lluvia de sobres.
+          </p>
+
+          <p class="gift__description">
+            Habrá una urna disponible para depositar tus regalos en la recepción
+            de la fiesta.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__container">
+        <p class="footer__text">
+          © 2026 RicoProgramar. Todos los derechos reservados.
+        </p>
+
+        <p class="footer__author">Desarrollado por Ing. Edwar Velásquez</p>
+      </div>
+    </footer>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+.countdown {
+  background: var(--color-primary);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.countdown__container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.countdown__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.countdown__grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.countdown__item span {
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+.countdown__item p {
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.countdown__divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(255,255,255,0.4);
+}
+
+/* ========================= */
+/* Mobile (override) */
+/* ========================= */
+@media (max-width: 767px) {
+  .countdown__grid {
+    display: grid; /* 🔑 cambia de flex a grid */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* Ocultar divisores (no tienen sentido en grid) */
+  .countdown__divider {
+    display: none;
+  }
+
+  /* Reducir tamaño de números */
+  .countdown__item span {
+    font-size: 3rem;
+  }
+
+  .countdown__item p {
+    font-size: 0.8rem;
+  }
+}
