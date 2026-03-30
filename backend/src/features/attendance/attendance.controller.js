@@ -9,50 +9,57 @@ export const confirmAttendance = async (req, res) => {
 
     await client.query("BEGIN");
 
-    // 1. Obtener invitación
     const invitationResult = await client.query(
-      `SELECT id FROM invitations WHERE token = $1`,
+      "SELECT id FROM invitations WHERE token = $1",
       [token]
     );
 
     if (invitationResult.rows.length === 0) {
-      throw new Error("Invitación no válida");
+      await client.query("ROLLBACK");
+      return res.status(404).json({ message: "Invitación no válida" });
     }
 
     const invitationId = invitationResult.rows[0].id;
 
-    // 2. Obtener invitados
+    // ✅ Protección one‑shot
+    const existing = await client.query(
+      "SELECT 1 FROM attendance WHERE invitation_id = $1 LIMIT 1",
+      [invitationId]
+    );
+
+    if (existing.rows.length > 0) {
+      await client.query("ROLLBACK");
+      return res.status(409).json({ message: "already_confirmed" });
+    }
+
     const guestsResult = await client.query(
-      `SELECT id, name FROM guests WHERE invitation_id = $1`,
+      "SELECT id, name FROM guests WHERE invitation_id = $1",
       [invitationId]
     );
 
     const guestsMap = new Map();
-    guestsResult.rows.forEach(g => {
-      guestsMap.set(g.name, g.id);
-    });
+    guestsResult.rows.forEach(g => guestsMap.set(g.name, g.id));
 
-    // 3. Insertar asistencia
     for (const guest of attendance) {
       const guestId = guestsMap.get(guest.name);
-
       if (!guestId) continue;
 
       await client.query(
-        `INSERT INTO attendance (invitation_id, guest_id, attending, confirmed_by)
-         VALUES ($1, $2, $3, $4)`,
+        `
+        INSERT INTO attendance (invitation_id, guest_id, attending, confirmed_by)
+        VALUES ($1, $2, $3, $4)
+        `,
         [invitationId, guestId, guest.attending, confirmName]
       );
     }
 
     await client.query("COMMIT");
-
-    res.json({ message: "Asistencia confirmada" });
+    return res.json({ message: "confirmed" });
 
   } catch (error) {
     await client.query("ROLLBACK");
     console.error(error);
-    res.status(500).json({ message: "Error al confirmar asistencia" });
+    return res.status(500).json({ message: "Error del servidor" });
   } finally {
     client.release();
   }

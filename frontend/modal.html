@@ -1,0 +1,85 @@
+<!-- ============================= -->
+<!-- MODAL 1: REGISTRO -->
+<!-- ============================= -->
+<div id="confirmationModal" class="modal" style="display: none">
+  <div class="modal__content">
+    <button id="modalClose" class="modal__close">&times;</button>
+
+    <h2 class="modal-title">Confirmar Asistencia</h2>
+    <p class="modal-subtitle">
+      Por favor confirma tu asistencia y la de tus acompañantes:
+    </p>
+
+    <div id="guestList" class="guest-list"></div>
+
+    <form id="attendanceForm">
+      <div class="form-group">
+        <label for="confirmName">Tu nombre completo:</label>
+        <input type="text" id="confirmName" name="confirmName" required />
+        <small class="input-error" style="display: none; color: red">
+          El nombre no coincide con el invitado principal.
+        </small>
+      </div>
+
+      <button type="button" class="btn btn--primary" id="btnReview">
+        Confirmar
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- MODAL 2: CONFIRMACIÓN PREVIA -->
+<!-- ============================= -->
+<div id="confirmationReviewModal" class="modal" style="display: none">
+  <div class="modal__content">
+    <h2 class="modal-title">¿Deseas confirmar esta asistencia?</h2>
+
+    <p class="modal-subtitle">
+      Las siguientes personas quedarán registradas como asistentes. Esta acción
+      no se podrá modificar posteriormente.
+    </p>
+
+    <ul id="reviewGuestList"></ul>
+
+    <p class="table-info">
+      <strong>Mesa asignada:</strong>
+      <span id="reviewTable"></span>
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn btn--outline" id="btnBackToEdit">
+        ← Volver y editar
+      </button>
+
+      <button class="btn btn--primary" id="btnConfirmFinal">
+        Sí, confirmar asistencia
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- MODAL 3: CONFIRMACIÓN FINAL -->
+<!-- ============================= -->
+<div id="confirmationMessage" class="modal" style="display: none">
+  <div class="modal__content">
+    <h2 class="modal-title"> Asistencia confirmada</h2>
+
+    <p class="modal-subtitle">
+      Tu asistencia ha sido registrada correctamente.
+    </p>
+
+    <div class="confirmation-summary">
+      <p><strong>Asistentes confirmados:</strong></p>
+      <ul id="finalGuestList"></ul>
+
+      <p class="table-info">
+        <strong>Mesa asignada:</strong>
+        <span id="finalTable"></span>
+      </p>
+    </div>
+
+    <button class="btn btn--primary" id="btnCloseFinal">Cerrar</button>
+  </div>
+</div>
