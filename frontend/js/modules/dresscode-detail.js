@@ -4,6 +4,6 @@ export function initBackNavigation() {
   if (!btn) return
 
   btn.addEventListener("click", () => {
-    window.location.href = "/index.html#vestimenta"
+    window.location.href = "/frontend/index.html#vestimenta"
   })
 }

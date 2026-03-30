@@ -33,9 +33,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const data = await res.json();
 
+      console.log("INVITATION API RESPONSE:", data);
+
       invitation = {
         mainGuest: data.mainGuest,
         companions: data.companions,
+        tableNumber: data.table, // Mapeado de mesa
       };
     } catch (error) {
       console.error("Error cargando invitación:", error);
@@ -135,6 +138,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const reviewList = modal2.querySelector("#reviewGuestList");
     const reviewTable = modal2.querySelector("#reviewTable");
+    reviewTable.textContent =
+      invitation.tableNumber ?? "La podrás ver cuando confirmes asistencia";
 
     reviewList.innerHTML = "";
     confirmed.forEach((g) => {
@@ -143,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       reviewList.appendChild(li);
     });
 
-    reviewTable.textContent = "Mesa 1";
+    // reviewTable.textContent = invitation.tableNumber;
 
     modal1.style.display = "none";
     modal2.style.display = "flex";
@@ -210,13 +215,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const res = await fetch(`http://localhost:3000/api/attendance/${token}`);
 
-    // ✅ CASO 1: aún NO ha confirmado (204)
+    // CASO 1: aún NO ha confirmado (204)
     if (res.status === 204) {
       console.warn("Aún no hay confirmación registrada");
       return;
     }
 
-    // ✅ CASO 2: error real
+    // CASO 2: error real
     if (!res.ok) {
       console.error("Error consultando asistencia");
       return;
@@ -235,7 +240,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         list.appendChild(li);
       });
 
+    // PINTAR MESA INMEDIATAMENTE
     table.textContent = data.table;
+
+    // ACTUALIZAR ESTADO FRONTEND
+    invitation.tableNumber = data.table; //Estado sincronizado
+
     modal3.style.display = "flex";
   }
 

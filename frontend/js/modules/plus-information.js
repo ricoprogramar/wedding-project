@@ -4,6 +4,6 @@ export function goToInformation() {
   if (!btn) return
 
   btn.addEventListener("click", () => {
-    window.location.href = "/index.html#evento"
+    window.location.href = "/frontend/index.html#evento"
   })
 }

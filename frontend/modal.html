@@ -21,9 +21,11 @@
         </small>
       </div>
 
-      <button type="button" class="btn btn--primary" id="btnReview">
-        Confirmar
-      </button>
+      <div class="modal__actions">
+        <button type="button" class="btn btn--primary" id="btnReview">
+          Confirmar
+        </button>
+      </div>
     </form>
   </div>
 </div>
@@ -33,21 +35,21 @@
 <!-- ============================= -->
 <div id="confirmationReviewModal" class="modal" style="display: none">
   <div class="modal__content">
-    <h2 class="modal-title">¿Deseas confirmar esta asistencia?</h2>
+    <h2 class="modal-title">¿Deseas confirmar tu asistencia?</h2>
 
     <p class="modal-subtitle">
       Las siguientes personas quedarán registradas como asistentes. Esta acción
       no se podrá modificar posteriormente.
     </p>
 
-    <ul id="reviewGuestList"></ul>
+    <ul id="reviewGuestList" class="guest-list"></ul>
 
     <p class="table-info">
       <strong>Mesa asignada:</strong>
       <span id="reviewTable"></span>
     </p>
 
-    <div class="modal-actions">
+    <div class="modal__actions">
       <button class="btn btn--outline" id="btnBackToEdit">
         ← Volver y editar
       </button>
@@ -64,6 +66,7 @@
 <!-- ============================= -->
 <div id="confirmationMessage" class="modal" style="display: none">
   <div class="modal__content">
+    
     <h2 class="modal-title"> Asistencia confirmada</h2>
 
     <p class="modal-subtitle">
@@ -71,15 +74,19 @@
     </p>
 
     <div class="confirmation-summary">
-      <p><strong>Asistentes confirmados:</strong></p>
-      <ul id="finalGuestList"></ul>
+      <ul id="finalGuestList" class="guest-list">
+        
+        <p><strong>Asistentes confirmados:</strong></p>
+
+      </ul>
 
       <p class="table-info">
         <strong>Mesa asignada:</strong>
-        <span id="finalTable"></span>
+        <span id="finalTable" class="table-info__number"></span>
       </p>
     </div>
-
-    <button class="btn btn--primary" id="btnCloseFinal">Cerrar</button>
+    <div class="modal__actions">
+      <button class="btn btn--primary" id="btnCloseFinal">Cerrar</button>
+    </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ export function initBackNavigation() {
   if (!btn) return
 
   btn.addEventListener("click", () => {
-    window.location.href = "/index.html#tips"
+    window.location.href = "/frontend/index.html#tips"
   })
 }
 
