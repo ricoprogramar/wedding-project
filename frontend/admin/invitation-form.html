@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Crear Invitaciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css" />
+  </head>
+
+  <body>
+    <!-- ============================= -->
+    <!-- Header -->
+    <!-- ============================= -->
+    <header class="admin-header">
+      <button id="btnBack" class="btn-back" type="button">← Volver</button>
+
+      <h1 >Crear Invitaciones</h1>
+    </header>
+
+    <!-- ============================= -->
+    <!-- Main -->
+    <!-- ============================= -->
+    <main class="admin-main">
+      <!-- ============================= -->
+      <!-- Sección: Creación masiva -->
+      <!-- ============================= -->
+      <section class="section-create">
+        <header class="section-header">
+          <h2>Crear invitaciones (masivo)</h2>
+          <p class="section-description">
+            Agrega invitaciones completas (invitado principal, mesa y
+            acompañantes) y guárdalas todas de una sola vez.
+          </p>
+        </header>
+
+        <!-- Contenedor de invitaciones -->
+        <div id="invitationsContainer" class="invitations-container">
+          <!-- Las tarjetas de invitación se insertan aquí por JS -->
+        </div>
+
+        <!-- Acciones de creación -->
+        <div class="actions-create">
+          <button id="addInvitation" type="button" class="btn-secondary">
+            ➕ Agregar invitación
+          </button>
+
+          <button id="saveInvitations" type="button" class="btn-primary">
+            💾 Guardar todas las invitaciones
+          </button>
+        </div>
+
+        <!-- Feedback -->
+        <div id="createStatus" class="create-status">
+          <!-- Mensajes de éxito / error -->
+        </div>
+      </section>
+
+      <!-- ============================= -->
+      <!-- Sección: Invitaciones creadas -->
+      <!-- ============================= -->
+      <section class="section-results">
+        <header class="section-header">
+          <h2>Invitaciones creadas</h2>
+          <p class="section-description">
+            Copia los enlaces para enviarlos a cada invitado principal.
+          </p>
+        </header>
+
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Invitado principal</th>
+              <th>Link de invitación</th>
+            </tr>
+          </thead>
+          <tbody id="result">
+            <!-- Resultados generados por el backend -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <!-- ============================= -->
+    <!-- Scripts -->
+    <!-- ============================= -->
+    <script src="/frontend/js/admin/invitation-form.js"></script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/frontend/styles/admin/invitation.css">
+  </head>
+  <body>
+    <section class="section-invitations-list">
+      <header class="section-header">
+        <h2>Invitaciones creadas</h2>
+        <p class="section-description">
+          Administra invitaciones, revisa estados y corrige información si es
+          necesario.
+        </p>
+      </header>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Invitado principal</th>
+            <th>Acompañantes</th>
+            <th>Mesa</th>
+            <th>Estado</th>
+            <th>Link</th>
+            <th>Activa</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="invitationsTableBody">
+          <!-- Se llena por JS -->
+        </tbody>
+      </table>
+    </section>
+
+    <script src="/frontend/js/admin/invitations.js"></script>
+  </body>
+</html>

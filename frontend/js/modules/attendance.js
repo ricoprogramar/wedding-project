@@ -7,7 +7,16 @@ document.addEventListener("DOMContentLoaded", async () => {
    * TOKEN
    ================================= */
   function getToken() {
-    return new URLSearchParams(window.location.search).get("token") || "abc123";
+    const urlToken = new URLSearchParams(window.location.search).get("token");
+
+    if (urlToken) {
+      // Guardar token por primera vez
+      sessionStorage.setItem("invitation_token", urlToken);
+      return urlToken;
+    }
+
+    // Recuperar token guardado
+    return sessionStorage.getItem("invitation_token");
   }
 
   /* ================================
@@ -17,10 +26,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function loadInvitation() {
     token = getToken();
 
-    try {
-      const res = await fetch(`http://localhost:3000/api/invitation/${token}`);
+    // GUARDIA DE SEGURIDAD
+    if (!token) {
+      console.warn("No hay token de invitación");
+      invitation = null;
+      return;
+    }
 
-      // ✅ Invitación no existe (caso normal, no error técnico)
+    try {
+      const res = await fetch(`http://localhost:3000/api/invitations/${token}`);
+
+      // Invitación no existe (caso normal, no error técnico)
       if (res.status === 404) {
         console.warn("Invitación no encontrada");
         invitation = null;
@@ -124,7 +140,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     const guestList = modal1.querySelector("#guestList");
     const error = modal1.querySelector(".input-error");
 
-    if (nameInput.value.trim() !== invitation.mainGuest) {
+    // if (nameInput.value.trim() !== invitation.mainGuest) {
+    //   error.style.display = "block";
+    //   return;
+    // }
+
+    const expectedName =
+      typeof invitation.mainGuest === "string"
+        ? invitation.mainGuest
+        : invitation.mainGuest.name;
+
+    if (nameInput.value.trim() !== expectedName) {
+      error.textContent = `Escribe tu nombre como aparece en la invitación: ${expectedName}`;
       error.style.display = "block";
       return;
     }

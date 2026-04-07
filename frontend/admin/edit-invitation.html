@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar invitación</title>
+
+    <!-- Reutilizamos estilos del admin -->
+    <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css" />
+  </head>
+
+  <body>
+    <!-- ============================= -->
+    <!-- Header -->
+    <!-- ============================= -->
+    <header class="admin-header">
+      <button id="btnBack" class="btn-back" type="button">
+        ← Volver
+      </button>
+      <h1>Editar invitación</h1>
+    </header>
+
+    <!-- ============================= -->
+    <!-- Main -->
+    <!-- ============================= -->
+    <main class="admin-main">
+
+      <!-- ============================= -->
+      <!-- Información general -->
+      <!-- ============================= -->
+      <section>
+        <div class="section-header">
+          <h2>Información de la invitación</h2>
+          <p class="section-description">
+            Revisa el estado actual antes de hacer cambios.
+          </p>
+        </div>
+
+        <div class="field">
+          <label>Invitado principal</label>
+          <input type="text" id="mainGuest" disabled />
+        </div>
+
+        <div class="field">
+          <label>Estado de confirmación</label>
+          <span id="invitationStatus" class="status"></span>
+        </div>
+      </section>
+
+      <!-- ============================= -->
+      <!-- Acompañantes -->
+      <!-- ============================= -->
+      <section>
+        <div class="section-header">
+          <h2>Acompañantes</h2>
+          <p class="section-description">
+            Estado registrado durante la confirmación de asistencia.
+          </p>
+        </div>
+
+        <ul id="companionsList">
+          <!-- Se llena por JS -->
+        </ul>
+      </section>
+
+      <!-- ============================= -->
+      <!-- Configuración -->
+      <!-- ============================= -->
+      <section>
+        <div class="section-header">
+          <h2>Configuración</h2>
+          <p class="section-description">
+            Cambios administrativos permitidos.
+          </p>
+        </div>
+
+        <div class="field">
+          <label>Mesa asignada</label>
+          <input type="text" id="tableNumber" />
+        </div>
+
+        <div class="field">
+          <label>
+            <input type="checkbox" id="isActive" />
+            Invitación activa
+          </label>
+        </div>
+      </section>
+
+      <!-- ============================= -->
+      <!-- Token -->
+      <!-- ============================= -->
+      <section>
+        <div class="section-header">
+          <h2>Seguridad</h2>
+          <p class="section-description">
+            El token controla el acceso del invitado.
+          </p>
+        </div>
+
+        <div class="field">
+          <label>Token actual</label>
+          <input type="text" id="token" disabled />
+        </div>
+
+        <button class="btn-secondary" id="regenerateToken">
+          🔄 Regenerar token
+        </button>
+      </section>
+
+      <!-- ============================= -->
+      <!-- Acciones -->
+      <!-- ============================= -->
+      <section>
+        <button class="btn-primary" id="saveChanges">
+          💾 Guardar cambios
+        </button>
+      </section>
+
+    </main>
+
+    <script type="module" src="/frontend/js/admin/edit-invitation.js"></script>
+
+  </body>
+</html>

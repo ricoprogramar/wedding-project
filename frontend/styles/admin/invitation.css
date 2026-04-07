@@ -1,0 +1,98 @@
+/* ======================================
+   Listado de invitaciones (alineado)
+   ====================================== */
+
+.section-invitations-list {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  border: 1px solid #e5e5e5;
+}
+
+/* Tabla base */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem 0.8rem;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Header consistente con inputs */
+.admin-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Hover suave */
+.admin-table tbody tr:hover {
+  background-color: #fafafa;
+}
+
+/* Estado RSVP */
+.status {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status.confirmed {
+  background: #e6f7ea;
+  color: #137a2a;
+}
+
+.status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Acompañantes */
+.companions-list span {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Link copiar */
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Activa */
+.toggle-active {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* Editar */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--color-primary);
+  opacity: 0.75;
+}
+
+.icon-button:hover {
+  opacity: 1;
+}

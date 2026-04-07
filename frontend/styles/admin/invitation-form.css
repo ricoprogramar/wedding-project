@@ -1,0 +1,311 @@
+/* ======================================
+   Base Admin (alineado con el sitio)
+   ====================================== */
+
+:root {
+  /* Reutilizamos las MISMAS variables */
+  --color-bg: #0f0f10;
+  --color-surface: #1a1a1d;
+  --color-primary: #fe0032;
+  --color-text: #ffffff;
+  --color-text-muted: #a1a1aa;
+  --color-border: #2a2a2e;
+
+  --radius: 12px;
+}
+
+/* Reset ligero */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 2rem;
+
+  /* Admin debe ser CLARO */
+  background-color: #f5f5f5;
+  color: #0f0f10;
+}
+
+/* ======================================
+   Header
+   ====================================== */
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+/* Botón atrás */
+.btn-back {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ======================================
+   Layout
+   ====================================== */
+
+.admin-main {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ======================================
+   Secciones
+   ====================================== */
+
+section {
+  background: #ffffff;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e5e5e5;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-description {
+  margin-top: 0.25rem;
+  color: #555555;
+  font-size: 0.9rem;
+}
+
+/* ======================================
+   Invitaciones (tarjetas)
+   ====================================== */
+
+.invitations-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.invitation {
+  border: 1px solid #dddddd;
+  border-radius: var(--radius);
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.invitation-header {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Campos */
+.field {
+  margin-bottom: 0.75rem;
+}
+
+label {
+  font-size: 0.85rem;
+  color: #555555;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+}
+
+/* ======================================
+   Acompañantes
+   ====================================== */
+
+.companions {
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+  border-left: 2px solid #e5e5e5;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ======================================
+   Botones
+   ====================================== */
+
+button {
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Acciones */
+.actions-create {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Botón primario */
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1rem;
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 0.6rem 1rem;
+}
+
+/* Destructivo */
+.danger {
+  color: #b00020;
+  background: none;
+  border: none;
+}
+
+/* ======================================
+   Resultados
+   ====================================== */
+
+.results-list {
+  list-style: none;
+  padding: 0;
+}
+
+.results-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 0.9rem;
+}
+
+/* ======================================
+   Feedback
+   ====================================== */
+
+.create-status {
+  margin-top: 1rem;
+  color: green;
+  font-weight: 500;
+}
+
+/* ======================================
+   Ajustes finos UX — Creación masiva
+   ====================================== */
+
+/* Lista de acompañantes */
+.companionList {
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem; /* 🔑 separación del botón */
+}
+
+/* Cada fila de acompañante */
+.row {
+  align-items: center;
+}
+
+/* Botón agregar acompañante */
+.addCompanion {
+  margin-top: 0.5rem;
+  align-self: flex-start; /* no estira todo el ancho */
+  font-size: 0.85rem;
+}
+
+/* Separación clara antes de eliminar invitación */
+.removeInvitation {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+/* Hacer botón eliminar MÁS discreto */
+.removeInvitation.danger {
+  opacity: 0.8;
+}
+
+.removeInvitation.danger:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Contador de acompañantes */
+.companions strong {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
+/* Input + botón X alineados mejor */
+.row input {
+  flex: 1;
+}
+
+.row button {
+  flex-shrink: 0;
+  margin-top: 0; /* evita desalineación vertical */
+}
+
+/* Espaciado interno de la tarjeta */
+.invitation {
+  padding: 1.25rem; /* un poco más aire */
+}
+
+/* Título de la invitación */
+.invitation-header {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+/* Estados / mensajes */
+.create-status {
+  line-height: 1.4;
+}
+
+/* ======================================
+   Tabla de invitaciones creadas
+   ====================================== */
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.results-table th,
+.results-table td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 0.9rem;
+}
+
+.results-table th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+.results-table .link {
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.results-table .link:hover {
+  text-decoration: underline;
+}
