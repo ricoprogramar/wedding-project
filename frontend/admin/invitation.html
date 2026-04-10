@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="stylesheet" href="/frontend/styles/admin/invitation.css">
+    <link rel="stylesheet" href="/frontend/styles/admin/invitation.css" />
   </head>
   <body>
     <section class="section-invitations-list">
-      <header class="section-header">
-        <h2>Invitaciones creadas</h2>
-        <p class="section-description">
-          Administra invitaciones, revisa estados y corrige información si es
-          necesario.
-        </p>
+      <header class="section-header list-header">
+        <div>
+          <h2>Invitaciones creadas</h2>
+          <p class="section-description">
+            Administra invitaciones, revisa estados y corrige información si es
+            necesario.
+          </p>
+        </div>
+
+        <button class="btn-primary" id="btnCreateInvitation">
+          + Crear invitación
+        </button>
       </header>
 
       <table class="admin-table">
@@ -26,7 +32,7 @@
             <th>Mesa</th>
             <th>Estado</th>
             <th>Link</th>
-            <th>Activa</th>
+            <th>Estado</th>
             <th></th>
           </tr>
         </thead>
@@ -36,6 +42,6 @@
       </table>
     </section>
 
-    <script src="/frontend/js/admin/invitations.js"></script>
+    <script type="module" src="/frontend/js/admin/invitation.js"></script>
   </body>
 </html>

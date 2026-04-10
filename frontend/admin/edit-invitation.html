@@ -6,7 +6,7 @@
     <title>Editar invitación</title>
 
     <!-- Reutilizamos estilos del admin -->
-    <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css" />
+    <link rel="stylesheet" href="/frontend/styles/admin/edit-invitation.css" />
   </head>
 
   <body>
@@ -14,9 +14,7 @@
     <!-- Header -->
     <!-- ============================= -->
     <header class="admin-header">
-      <button id="btnBack" class="btn-back" type="button">
-        ← Volver
-      </button>
+      <button id="btnBack" class="btn-back" type="button">← Volver</button>
       <h1>Editar invitación</h1>
     </header>
 
@@ -24,7 +22,6 @@
     <!-- Main -->
     <!-- ============================= -->
     <main class="admin-main">
-
       <!-- ============================= -->
       <!-- Información general -->
       <!-- ============================= -->
@@ -69,9 +66,7 @@
       <section>
         <div class="section-header">
           <h2>Configuración</h2>
-          <p class="section-description">
-            Cambios administrativos permitidos.
-          </p>
+          <p class="section-description">Cambios administrativos permitidos.</p>
         </div>
 
         <div class="field">
@@ -79,11 +74,15 @@
           <input type="text" id="tableNumber" />
         </div>
 
-        <div class="field">
-          <label>
+        <div class="field invitation-status">
+          <span class="status-label">Estado de la invitación</span>
+
+          <label class="status-toggle">
             <input type="checkbox" id="isActive" />
-            Invitación activa
+            <span class="toggle-ui"></span>
           </label>
+
+          <span class="status-text" id="statusText"></span>
         </div>
       </section>
 
@@ -111,15 +110,12 @@
       <!-- ============================= -->
       <!-- Acciones -->
       <!-- ============================= -->
-      <section>
-        <button class="btn-primary" id="saveChanges">
-          💾 Guardar cambios
-        </button>
+      <section class="actions">
+         <button class="btn-secondary" id="btnCancel">Cancelar</button>
+        <button class="btn-primary" id="saveChanges">💾 Guardar cambios</button>
       </section>
-
     </main>
 
     <script type="module" src="/frontend/js/admin/edit-invitation.js"></script>
-
   </body>
 </html>

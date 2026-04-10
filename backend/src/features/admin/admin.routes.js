@@ -5,7 +5,8 @@ import {
     getInvitationByToken,
     listInvitations,
     getInvitationById,
-    updateInvitationTable
+    updateInvitationTable,
+    updateInvitationActive
 } from "./invitation.admin.controller.js";
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router.get("/", listInvitations);
 router.get("/edit/:id", getInvitationById);
 
 router.put("/edit/:id/table", updateInvitationTable);
+
+router.put("/edit/:id/active", updateInvitationActive);
 
 // 🔹 2. TOKEN después
 router.get("/:token", getInvitationByToken);

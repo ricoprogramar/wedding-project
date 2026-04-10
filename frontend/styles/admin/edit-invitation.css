@@ -1,0 +1,201 @@
+/* frontend/styles/admin/edit-invitation.css */
+
+@import "../variables.css";
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--color-bg);
+  color: #0f0f10;
+}
+
+/* Header */
+.admin-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-bottom: 2rem;
+  color: var(--color-text);
+}
+
+.admin-header h1 {
+  grid-column: 2;
+  margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.btn-back {  
+  position: absolute;
+  left: 0;
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+
+/* Layout */
+.admin-main {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr; /* ✅ Mobile first */
+  gap: 1.5rem;
+}
+
+/* Cards */
+section {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  border: 1px solid #e5e5e5;
+}
+
+
+/* Section header */
+.section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.section-description {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Alinear acciones a la derecha */
+section:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Fields */
+.field {
+  margin-top: 1rem;
+}
+
+label {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Status */
+.status {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status.confirmed { color: var(--color-success); }
+.status.pending { color: #777; }
+.status.not-attending { color: var(--color-primary); }
+
+/* Switch */
+.invitation-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.status-toggle {
+  position: relative;
+  width: 42px;
+  height: 22px;
+}
+
+.status-toggle input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle-ui {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 999px;
+  transition: background .2s;
+}
+
+.toggle-ui::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .2s;
+}
+
+.status-toggle input:checked + .toggle-ui {
+  background: var(--color-success);
+}
+
+.status-toggle input:checked + .toggle-ui::before {
+  transform: translateX(20px);
+}
+
+.status-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-text.active { color: var(--color-success); }
+.status-text.inactive { color: #777; }
+
+/* Acciones */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+
+/* Desktop only */
+@media (width > 769px) {
+  .admin-main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-main section:last-child {
+    grid-column: span 2;
+  }
+
+  .btn-back {
+  padding-left: 300px;  
+ }
+}
+
+

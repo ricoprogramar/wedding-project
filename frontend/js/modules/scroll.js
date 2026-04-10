@@ -1,3 +1,5 @@
+//scroll.js
+
 export function initCenteredScroll() {
   const links = document.querySelectorAll('a[href^="#"]')
 

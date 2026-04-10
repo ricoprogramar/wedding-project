@@ -100,6 +100,18 @@ function createInvitationBlock() {
 createInvitationBlock();
 addInvitationBtn.onclick = createInvitationBlock;
 
+//Acción cancelar
+document.getElementById("cancelCreate")?.addEventListener("click", () => {
+  history.back();
+});
+
+
+// CANCELAR / VOLVER sin guardar
+document.getElementById("btnBack")?.addEventListener("click", () => {
+  history.back();
+});
+
+
 // ================================
 // Guardar invitaciones
 // ================================
@@ -137,7 +149,7 @@ saveBtn.onclick = async () => {
   saveBtn.textContent = "Guardando...";
 
   try {
-    const res = await fetch("http://localhost:3000/api/invitations", {
+    const res = await fetch("http://localhost:3000/api/invitation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ invitations }),

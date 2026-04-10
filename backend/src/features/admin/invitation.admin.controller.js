@@ -1,10 +1,14 @@
 import { pool } from "../../config/db.js";
-import crypto from "crypto";
 
-// Genera token único (equivalente a 'abc123')
+// ================================
+
 function generateToken() {
   return crypto.randomBytes(4).toString("hex");
 }
+
+// ================================
+// Crear invitaciones (masivo)
+// ================================
 
 export async function createInvitationsBulk(req, res) {
   const client = await pool.connect();
@@ -24,7 +28,6 @@ export async function createInvitationsBulk(req, res) {
       const { mainGuestName, tableNumber, companions } = inv;
       const token = generateToken();
 
-      // ✅ 1. INSERT invitations (como tu WITH invitation_data)
       const invitationResult = await client.query(
         `
         INSERT INTO invitations (token, main_guest_name, table_number)
@@ -36,7 +39,7 @@ export async function createInvitationsBulk(req, res) {
 
       const invitationId = invitationResult.rows[0].id;
 
-      // ✅ 2. Invitado principal (is_main = true)
+      // Invitado principal
       await client.query(
         `
         INSERT INTO guests (invitation_id, name, is_main)
@@ -45,7 +48,7 @@ export async function createInvitationsBulk(req, res) {
         [invitationId, mainGuestName]
       );
 
-      // ✅ 3. Acompañantes (is_main = false)
+      // Acompañantes
       if (Array.isArray(companions)) {
         for (const name of companions) {
           await client.query(
@@ -81,14 +84,18 @@ export async function createInvitationsBulk(req, res) {
   }
 }
 
+// ================================
+// Obtener invitación por TOKEN (RSVP)
+// 🔴 AQUÍ ESTABA EL BUG → is_active
+// ================================
+
 export async function getInvitationByToken(req, res) {
   const { token } = req.params;
 
   try {
-    // 1. Buscar invitación
     const invitationResult = await pool.query(
       `
-      SELECT id, main_guest_name, table_number
+      SELECT id, main_guest_name, table_number, is_active
       FROM invitations
       WHERE token = $1
       `,
@@ -101,7 +108,14 @@ export async function getInvitationByToken(req, res) {
 
     const invitation = invitationResult.rows[0];
 
-    // 2. Buscar invitados asociados
+    // ✅ Bloquear invitaciones desactivadas
+    if (!invitation.is_active) {
+      return res.status(403).json({
+        message: "inactive_invitation"
+      });
+    }
+
+    // Buscar invitados
     const guestsResult = await pool.query(
       `
       SELECT name, is_main
@@ -117,7 +131,6 @@ export async function getInvitationByToken(req, res) {
       .filter(g => !g.is_main)
       .map(g => g.name);
 
-    // 3. Respuesta EXACTA para tu frontend
     return res.json({
       mainGuest,
       companions,
@@ -130,7 +143,10 @@ export async function getInvitationByToken(req, res) {
   }
 }
 
-// Función para listar invitaciones (SIN duplicados y CON estado individual)
+// ================================
+// Listar invitaciones (ADMIN)
+// ================================
+
 export async function listInvitations(req, res) {
   try {
     const result = await pool.query(`
@@ -138,6 +154,7 @@ export async function listInvitations(req, res) {
         i.id               AS invitation_id,
         i.token,
         i.table_number,
+        i.is_active,
         i.main_guest_name,
         g.id               AS guest_id,
         g.name             AS guest_name,
@@ -160,6 +177,7 @@ export async function listInvitations(req, res) {
           id: row.invitation_id,
           token: row.token,
           table: row.table_number,
+          isActive: row.is_active,
           confirmed: false,
           mainGuest: null,
           companions: []
@@ -168,12 +186,10 @@ export async function listInvitations(req, res) {
 
       const invitation = map.get(row.invitation_id);
 
-      // Si existe al menos una fila de attendance → invitación confirmada
       if (row.attending !== null) {
         invitation.confirmed = true;
       }
 
-      // Invitado principal
       if (row.is_main) {
         invitation.mainGuest = {
           name: row.main_guest_name,
@@ -182,7 +198,6 @@ export async function listInvitations(req, res) {
         continue;
       }
 
-      // Acompañantes (1 fila = 1 persona, sin duplicar)
       invitation.companions.push({
         name: row.guest_name,
         attending: row.attending
@@ -196,16 +211,21 @@ export async function listInvitations(req, res) {
   }
 }
 
-// Obtener invitación para edición (por ID)
+// ================================
+// Obtener invitación por ID (EDITAR)
+// ================================
+
 export async function getInvitationById(req, res) {
   const { id } = req.params;
 
   try {
-    const result = await pool.query(`
+    const result = await pool.query(
+      `
       SELECT
         i.id               AS invitation_id,
         i.token,
         i.table_number,
+        i.is_active,
         g.id               AS guest_id,
         g.name             AS guest_name,
         g.is_main,
@@ -218,7 +238,9 @@ export async function getInvitationById(req, res) {
        AND a.guest_id = g.id
       WHERE i.id = $1
       ORDER BY g.is_main DESC
-    `, [id]);
+      `,
+      [id]
+    );
 
     if (result.rows.length === 0) {
       return res.sendStatus(404);
@@ -227,6 +249,7 @@ export async function getInvitationById(req, res) {
     const invitation = {
       id,
       table: result.rows[0].table_number,
+      isActive: result.rows[0].is_active,
       token: result.rows[0].token,
       mainGuest: null,
       companions: []
@@ -247,14 +270,16 @@ export async function getInvitationById(req, res) {
     }
 
     return res.json(invitation);
-
   } catch (error) {
     console.error("Error obteniendo invitación por ID:", error);
     return res.sendStatus(500);
   }
 }
 
-// Actualizar mesa de una invitación (ADMIN)
+// ================================
+// Actualizar mesa (ADMIN)
+// ================================
+
 export async function updateInvitationTable(req, res) {
   const { id } = req.params;
   const { tableNumber } = req.body;
@@ -279,3 +304,35 @@ export async function updateInvitationTable(req, res) {
     return res.sendStatus(500);
   }
 }
+
+// ================================
+// Activar / desactivar invitación
+// ================================
+
+export async function updateInvitationActive(req, res) {
+  const { id } = req.params;
+  const { isActive } = req.body;
+
+  if (typeof isActive !== "boolean") {
+    return res.status(400).json({ message: "Estado inválido" });
+  }
+
+  try {
+    await pool.query(
+      `
+      UPDATE invitations
+      SET is_active = $1
+      WHERE id = $2
+      `,
+      [isActive, id]
+    );
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.error("Error actualizando estado:", error);
+    return res.sendStatus(500);
+  }
+}
+import crypto from "crypto";
+
+// ================================

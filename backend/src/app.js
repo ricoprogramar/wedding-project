@@ -36,7 +36,7 @@ app.use(express.json());
 
 // rutas bien definidas
 app.use("/api/attendance", attendanceRoutes);
-app.use("/api/invitations", adminRoutes);
+app.use("/api/invitation", adminRoutes);
 
 app.use("/frontend", express.static(path.join(__dirname, "../frontend")));
 

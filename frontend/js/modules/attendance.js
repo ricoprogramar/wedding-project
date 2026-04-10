@@ -1,73 +1,328 @@
+// // frontend/js/attendance.js
+// import { API_BASE } from "../config.js";
+
+// document.addEventListener("DOMContentLoaded", async () => {
+//   let invitation = null;
+//   let token = null;
+//   let modalContainer = null;
+
+//   /* ================================
+//    * TOKEN
+//    ================================= */
+//   function getToken() {
+//     const urlToken = new URLSearchParams(window.location.search).get("token");
+
+//     if (urlToken) {
+//       sessionStorage.setItem("invitation_token", urlToken);
+//       return urlToken;
+//     }
+
+//     return sessionStorage.getItem("invitation_token");
+//   }
+
+//   /* ================================
+//    * CARGAR LA INVITACIÓN
+//    ================================= */
+//   async function loadInvitation() {
+
+//     token = getToken();
+
+//     if (!token) return;
+
+//     const res = await fetch(`${API_BASE}/api/invitations/${token}`);
+
+//     // ✅ Invitación desactivada
+//     if (res.status === 403) {
+//       showInactiveInvitation();
+//       invitation = "__INACTIVE__";
+//       return;
+//     }
+
+//     // Invitación no existe
+//     if (res.status === 404) {
+//       invitation = null;
+//       return;
+//     }
+
+//     if (!res.ok) {
+//       throw new Error(`Error HTTP ${res.status}`);
+//     }
+
+//     const data = await res.json();
+
+//     invitation = {
+//       mainGuest: data.mainGuest,
+//       companions: data.companions,
+//       tableNumber: data.table,
+//     };
+//   }
+
+//   await loadInvitation();
+
+//   // ❌ No continuar flujo RSVP
+//   if (!invitation || invitation === "__INACTIVE__") return;
+
+//   /* ================================
+//    * LOAD MODAL
+//    ================================= */
+//   async function loadModal() {
+//     const res = await fetch("./modal.html");
+//     const html = await res.text();
+//     const container = document.createElement("div");
+//     container.innerHTML = html;
+//     document.body.appendChild(container);
+//     return container;
+//   }
+
+//   modalContainer = await loadModal();
+
+//   /* ================================
+//    * RENDER GUESTS
+//    ================================= */
+//   function renderGuests(container) {
+//     container.innerHTML = "";
+
+//     const guests = [invitation.mainGuest, ...invitation.companions];
+
+//     guests.forEach((guest, i) => {
+//       const div = document.createElement("div");
+//       div.className = "form-group";
+//       div.innerHTML = `
+//         <label>
+//           <input type="checkbox" name="guest_${i}" checked />
+//           ${guest}
+//         </label>
+//       `;
+//       container.appendChild(div);
+//     });
+//   }
+
+//   /* ================================
+//    * BOTÓN CONFIRMAR
+//    ================================= */
+//   document.addEventListener("click", async (e) => {
+//     if (!e.target.closest(".btn-confirm")) return;
+
+//     const res = await fetch(`${API_BASE}/api/attendance/${token}`);
+
+//     // ✅ NO confirmado → Modal 1
+//     if (res.status === 204) {
+//       const modal1 = modalContainer.querySelector("#confirmationModal");
+//       const list = modal1.querySelector("#guestList");
+//       renderGuests(list);
+//       modal1.style.display = "flex";
+//       return;
+//     }
+
+//     // ✅ YA confirmado → Modal final
+//     if (res.status === 200) {
+//       await showFinalConfirmation();
+//       return;
+//     }
+//   });
+
+//   /* ================================
+//    * MODAL 1 → REVIEW
+//    ================================= */
+//   document.addEventListener("click", (e) => {
+//     if (e.target.id !== "btnReview") return;
+
+//     const modal1 = modalContainer.querySelector("#confirmationModal");
+//     const modal2 = modalContainer.querySelector("#confirmationReviewModal");
+
+//     const nameInput = modal1.querySelector("#confirmName");
+//     const error = modal1.querySelector(".input-error");
+
+//     if (nameInput.value.trim() !== invitation.mainGuest) {
+//       error.textContent = `Escribe tu nombre como aparece en la invitación: ${invitation.mainGuest}`;
+//       error.style.display = "block";
+//       return;
+//     }
+
+//     error.style.display = "none";
+
+//     const guests = [invitation.mainGuest, ...invitation.companions];
+//     const guestList = modal1.querySelector("#guestList");
+//     const confirmed = guests.filter((_, i) =>
+//       guestList.querySelector(`input[name="guest_${i}"]`).checked
+//     );
+
+//     const reviewList = modal2.querySelector("#reviewGuestList");
+//     const reviewTable = modal2.querySelector("#reviewTable");
+
+//     reviewTable.textContent =
+//       invitation.tableNumber ?? "La podrás ver cuando confirmes asistencia";
+
+//     reviewList.innerHTML = "";
+//     confirmed.forEach((g) => {
+//       const li = document.createElement("li");
+//       li.textContent = g;
+//       reviewList.appendChild(li);
+//     });
+
+//     modal1.style.display = "none";
+//     modal2.style.display = "flex";
+//   });
+
+//   /* ================================
+//    * CONFIRMAR FINAL
+//    ================================= */
+//   document.addEventListener("click", async (e) => {
+//     if (e.target.id !== "btnConfirmFinal") return;
+
+//     const modal1 = modalContainer.querySelector("#confirmationModal");
+//     const guestList = modal1.querySelector("#guestList");
+//     const nameInput = modal1.querySelector("#confirmName");
+
+//     const guests = [invitation.mainGuest, ...invitation.companions];
+//     const attendance = guests.map((g, i) => ({
+//       name: g,
+//       attending: guestList.querySelector(`input[name="guest_${i}"]`).checked,
+//     }));
+
+//     const res = await fetch(`${API_BASE}/api/attendance`, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         token,
+//         confirmName: nameInput.value.trim(),
+//         attendance,
+//       }),
+//     });
+
+//     if (!res.ok) {
+//       throw new Error("Error confirmando asistencia");
+//     }
+
+//     modalContainer.querySelector("#confirmationReviewModal").style.display = "none";
+//     await showFinalConfirmation();
+//   });
+
+//   /* ================================
+//    * MODAL FINAL
+//    ================================= */
+//   async function showFinalConfirmation() {
+//     const modal3 = modalContainer.querySelector("#confirmationMessage");
+//     const list = modal3.querySelector("#finalGuestList");
+//     const table = modal3.querySelector("#finalTable");
+
+//     const res = await fetch(`${API_BASE}/api/attendance/${token}`);
+//     if (!res.ok) return;
+
+//     const data = await res.json();
+
+//     list.innerHTML = "";
+//     data.attendance
+//       .filter((g) => g.attending)
+//       .forEach((g) => {
+//         const li = document.createElement("li");
+//         li.textContent = g.name;
+//         list.appendChild(li);
+//       });
+
+//     table.textContent = data.table;
+//     invitation.tableNumber = data.table;
+
+//     modal3.style.display = "flex";
+//   }
+
+//   /* ================================
+//    * CIERRE GENÉRICO DE MODALES ✅
+//    ================================= */
+//   document.addEventListener("click", (e) => {
+//     // Cerrar con X o botón cerrar
+//     if (
+//       e.target.id === "modalClose" ||
+//       e.target.id === "btnCloseFinal" ||
+//       e.target.classList.contains("modal__close")
+//     ) {
+//       modalContainer.querySelectorAll(".modal").forEach((m) => {
+//         m.style.display = "none";
+//       });
+//       return;
+//     }
+
+//     // Cerrar al hacer clic en fondo oscuro
+//     if (e.target.classList.contains("modal")) {
+//       e.target.style.display = "none";
+//     }
+//   });
+// });
+
+// /* ================================
+//  * INVITACIÓN INACTIVA (VISUAL)
+//  ================================= */
+// function showInactiveInvitation() {
+//   const buttons = document.querySelectorAll(".btn-confirm");
+
+//   buttons.forEach((btn) => {
+//     btn.disabled = true;
+//     btn.textContent = "Invitación desactivada";
+//     btn.classList.add("btn-disabled");
+//     btn.setAttribute("aria-disabled", "true");
+//   });
+
+//   let msg = document.querySelector(".inactive-invitation");
+//   if (msg) return;
+
+//   msg = document.createElement("div");
+//   msg.className = "inactive-invitation";
+//   msg.innerHTML = `
+//     <h3>Invitación desactivada</h3>
+//     <p>
+//       Esta invitación no está activa en este momento.<br>
+//       Por favor, contacta al administrador del evento.
+//     </p>
+//   `;
+
+//   document.querySelector(".confirm-container")?.appendChild(msg);
+// }
+
+// frontend/js/modules/attendance.js
+// FIX: token centralizado usando token.js
+import { API_BASE } from "../config.js";
+import { getToken } from "./token.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
   let invitation = null;
-  let token = null;
+  let token = getToken();
   let modalContainer = null;
 
   /* ================================
-   * TOKEN
+   * CARGAR LA INVITACIÓN
    ================================= */
-  function getToken() {
-    const urlToken = new URLSearchParams(window.location.search).get("token");
+  async function loadInvitation() {
+    if (!token) return;
 
-    if (urlToken) {
-      // Guardar token por primera vez
-      sessionStorage.setItem("invitation_token", urlToken);
-      return urlToken;
+    const res = await fetch(`${API_BASE}/api/invitation/${token}`);
+
+    if (res.status === 403) {
+      showInactiveInvitation();
+      invitation = "__INACTIVE__";
+      return;
     }
 
-    // Recuperar token guardado
-    return sessionStorage.getItem("invitation_token");
-  }
-
-  /* ================================
-   * LOAD INVITATION
-   ================================= */
-
-  async function loadInvitation() {
-    token = getToken();
-
-    // GUARDIA DE SEGURIDAD
-    if (!token) {
-      console.warn("No hay token de invitación");
+    if (res.status === 404) {
       invitation = null;
       return;
     }
 
-    try {
-      const res = await fetch(`http://localhost:3000/api/invitations/${token}`);
-
-      // Invitación no existe (caso normal, no error técnico)
-      if (res.status === 404) {
-        console.warn("Invitación no encontrada");
-        invitation = null;
-        return;
-      }
-
-      if (!res.ok) {
-        throw new Error(`Error HTTP ${res.status}`);
-      }
-
-      const data = await res.json();
-
-      console.log("INVITATION API RESPONSE:", data);
-
-      invitation = {
-        mainGuest: data.mainGuest,
-        companions: data.companions,
-        tableNumber: data.table, // Mapeado de mesa
-      };
-    } catch (error) {
-      console.error("Error cargando invitación:", error);
-      invitation = null;
+    if (!res.ok) {
+      throw new Error(`Error HTTP ${res.status}`);
     }
+
+    const data = await res.json();
+
+    invitation = {
+      mainGuest: data.mainGuest,
+      companions: data.companions,
+      tableNumber: data.table,
+    };
   }
 
   await loadInvitation();
 
-  if (!invitation) {
-    console.warn("No hay invitación válida cargada");
-    return;
-  }
+  if (!invitation || invitation === "__INACTIVE__") return;
 
   /* ================================
    * LOAD MODAL
@@ -88,8 +343,8 @@ document.addEventListener("DOMContentLoaded", async () => {
    ================================= */
   function renderGuests(container) {
     container.innerHTML = "";
-
     const guests = [invitation.mainGuest, ...invitation.companions];
+
     guests.forEach((guest, i) => {
       const div = document.createElement("div");
       div.className = "form-group";
@@ -103,55 +358,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* ================================
+   * BOTÓN CONFIRMAR
+   ================================= */
   document.addEventListener("click", async (e) => {
     if (!e.target.closest(".btn-confirm")) return;
 
-    const res = await fetch(`http://localhost:3000/api/attendance/${token}`);
+    const res = await fetch(`${API_BASE}/api/attendance/${token}`);
 
-    // ✅ CASO 1: NO ha confirmado → abrir Modal 1
     if (res.status === 204) {
       const modal1 = modalContainer.querySelector("#confirmationModal");
-      const list = modal1.querySelector("#guestList");
-
-      renderGuests(list);
+      renderGuests(modal1.querySelector("#guestList"));
       modal1.style.display = "flex";
       return;
     }
 
-    // ✅ CASO 2: YA confirmó → mostrar resumen (Modal 3)
     if (res.status === 200) {
       await showFinalConfirmation();
-      return;
     }
-
-    console.error("Estado inesperado de asistencia:", res.status);
   });
 
   /* ================================
-   * MODAL 1 → MODAL 2 (REVIEW)
+   * MODAL 1 → REVIEW
    ================================= */
   document.addEventListener("click", (e) => {
     if (e.target.id !== "btnReview") return;
 
     const modal1 = modalContainer.querySelector("#confirmationModal");
     const modal2 = modalContainer.querySelector("#confirmationReviewModal");
-
     const nameInput = modal1.querySelector("#confirmName");
-    const guestList = modal1.querySelector("#guestList");
     const error = modal1.querySelector(".input-error");
 
-    // if (nameInput.value.trim() !== invitation.mainGuest) {
-    //   error.style.display = "block";
-    //   return;
-    // }
-
-    const expectedName =
-      typeof invitation.mainGuest === "string"
-        ? invitation.mainGuest
-        : invitation.mainGuest.name;
-
-    if (nameInput.value.trim() !== expectedName) {
-      error.textContent = `Escribe tu nombre como aparece en la invitación: ${expectedName}`;
+    if (nameInput.value.trim() !== invitation.mainGuest) {
+      error.textContent = `Escribe tu nombre como aparece en la invitación: ${invitation.mainGuest}`;
       error.style.display = "block";
       return;
     }
@@ -159,12 +398,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     error.style.display = "none";
 
     const guests = [invitation.mainGuest, ...invitation.companions];
+    const guestList = modal1.querySelector("#guestList");
     const confirmed = guests.filter(
       (_, i) => guestList.querySelector(`input[name="guest_${i}"]`).checked,
     );
 
     const reviewList = modal2.querySelector("#reviewGuestList");
     const reviewTable = modal2.querySelector("#reviewTable");
+
     reviewTable.textContent =
       invitation.tableNumber ?? "La podrás ver cuando confirmes asistencia";
 
@@ -175,90 +416,70 @@ document.addEventListener("DOMContentLoaded", async () => {
       reviewList.appendChild(li);
     });
 
-    // reviewTable.textContent = invitation.tableNumber;
-
     modal1.style.display = "none";
     modal2.style.display = "flex";
   });
 
   /* ================================
-   * MODAL 2 ACTIONS
+   * Volver del modal review al modal inicial
    ================================= */
-  document.addEventListener("click", async (e) => {
+  document.addEventListener("click", (e) => {
+    if (e.target.id !== "btnBackToEdit") return;
+
     const modal1 = modalContainer.querySelector("#confirmationModal");
     const modal2 = modalContainer.querySelector("#confirmationReviewModal");
 
-    if (e.target.id === "btnBackToEdit") {
-      modal2.style.display = "none";
-      modal1.style.display = "flex";
-      return;
-    }
-
-    if (e.target.id === "btnConfirmFinal") {
-      const guestList = modal1.querySelector("#guestList");
-      const nameInput = modal1.querySelector("#confirmName");
-
-      const guests = [invitation.mainGuest, ...invitation.companions];
-      const attendance = guests.map((g, i) => ({
-        name: g,
-        attending: guestList.querySelector(`input[name="guest_${i}"]`).checked,
-      }));
-
-      const res = await fetch("http://localhost:3000/api/attendance", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token,
-          confirmName: nameInput.value.trim(),
-          attendance,
-        }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-
-        if (data.message === "already_confirmed") {
-          //  Mostrar datos ya confirmados
-          modal2.style.display = "none";
-          await showFinalConfirmation();
-          return;
-        }
-
-        throw new Error("Error confirmando asistencia");
-      }
-
-      modal2.style.display = "none";
-      await showFinalConfirmation();
-    }
+    modal2.style.display = "none";
+    modal1.style.display = "flex";
   });
 
   /* ================================
-   * MODAL 3
+   * CONFIRMAR FINAL
+   ================================= */
+  document.addEventListener("click", async (e) => {
+    if (e.target.id !== "btnConfirmFinal") return;
+
+    const modal1 = modalContainer.querySelector("#confirmationModal");
+    const guestList = modal1.querySelector("#guestList");
+    const nameInput = modal1.querySelector("#confirmName");
+
+    const guests = [invitation.mainGuest, ...invitation.companions];
+    const attendance = guests.map((g, i) => ({
+      name: g,
+      attending: guestList.querySelector(`input[name="guest_${i}"]`).checked,
+    }));
+
+    const res = await fetch(`${API_BASE}/api/attendance`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token,
+        confirmName: nameInput.value.trim(),
+        attendance,
+      }),
+    });
+
+    if (!res.ok) throw new Error("Error confirmando asistencia");
+
+    modalContainer.querySelector("#confirmationReviewModal").style.display =
+      "none";
+    await showFinalConfirmation();
+  });
+
+  /* ================================
+   * MODAL FINAL
    ================================= */
   async function showFinalConfirmation() {
     const modal3 = modalContainer.querySelector("#confirmationMessage");
     const list = modal3.querySelector("#finalGuestList");
     const table = modal3.querySelector("#finalTable");
 
-    const res = await fetch(`http://localhost:3000/api/attendance/${token}`);
+    const res = await fetch(`${API_BASE}/api/attendance/${token}`);
+    if (!res.ok) return;
 
-    // CASO 1: aún NO ha confirmado (204)
-    if (res.status === 204) {
-      console.warn("Aún no hay confirmación registrada");
-      return;
-    }
-
-    // CASO 2: error real
-    if (!res.ok) {
-      console.error("Error consultando asistencia");
-      return;
-    }
-
-    // ✅ CASO 3: ya confirmó → SÍ hay JSON
     const data = await res.json();
 
     list.innerHTML = "";
-
     data.attendance
       .filter((g) => g.attending)
       .forEach((g) => {
@@ -267,42 +488,53 @@ document.addEventListener("DOMContentLoaded", async () => {
         list.appendChild(li);
       });
 
-    // PINTAR MESA INMEDIATAMENTE
     table.textContent = data.table;
-
-    // ACTUALIZAR ESTADO FRONTEND
-    invitation.tableNumber = data.table; //Estado sincronizado
-
+    invitation.tableNumber = data.table;
     modal3.style.display = "flex";
   }
 
+  /* ================================
+   * CIERRE MODALES
+   ================================= */
   document.addEventListener("click", (e) => {
-    if (e.target.id === "btnCloseFinal") {
-      const modal3 = modalContainer.querySelector("#confirmationMessage");
-      modal3.style.display = "none";
-    }
-  });
-
-  // ================================
-  // CIERRE GENERICO DE MODALES
-  // ================================
-  document.addEventListener("click", (e) => {
-    // Cerrar al hacer clic en la X
     if (
       e.target.id === "modalClose" ||
       e.target.id === "btnCloseFinal" ||
       e.target.classList.contains("modal__close")
     ) {
-      const modals = modalContainer.querySelectorAll(".modal");
-      modals.forEach((modal) => {
-        modal.style.display = "none";
+      modalContainer.querySelectorAll(".modal").forEach((m) => {
+        m.style.display = "none";
       });
-      return;
     }
 
-    // Cerrar al hacer clic en el fondo oscuro
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
     }
   });
 });
+
+/* ================================
+ * INVITACIÓN INACTIVA
+ ================================= */
+function showInactiveInvitation() {
+  document.querySelectorAll(".btn-confirm").forEach((btn) => {
+    btn.disabled = true;
+    btn.textContent = "Invitación desactivada";
+    btn.classList.add("btn-disabled");
+    btn.setAttribute("aria-disabled", "true");
+  });
+
+  if (document.querySelector(".inactive-invitation")) return;
+
+  const msg = document.createElement("div");
+  msg.className = "inactive-invitation";
+  msg.innerHTML = `
+    <h3>Invitación desactivada</h3>
+    <p>
+      Esta invitación no está activa.<br />
+      Contacta al administrador del evento.
+    </p>
+  `;
+
+  document.querySelector(".confirm-container")?.appendChild(msg);
+}

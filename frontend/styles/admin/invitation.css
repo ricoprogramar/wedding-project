@@ -1,3 +1,4 @@
+@import "../variables.css";
 /* ======================================
    Listado de invitaciones (alineado)
    ====================================== */
@@ -95,4 +96,73 @@
 
 .icon-button:hover {
   opacity: 1;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==============================
+   SWITCH (LISTAR + EDITAR)
+   ============================== */
+.status-toggle {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.status-toggle input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.status-toggle .toggle-ui {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.status-toggle .toggle-ui::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.status-toggle input:checked + .toggle-ui {
+  background: var(--color-success);
+}
+
+.status-toggle input:checked + .toggle-ui::before {
+  transform: translateX(20px);
+}
+
+/* Botón primario (Crear invitación) */
+/* Botón crear invitación (verde) */
+.btn-primary {
+  background: var(--color-success);
+  color: #ffffff;
+  border: 1px solid var(--color-success);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
 }

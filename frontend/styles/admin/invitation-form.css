@@ -1,78 +1,72 @@
-/* ======================================
-   Base Admin (alineado con el sitio)
-   ====================================== */
+/* frontend/styles/admin/invitation-form.css */
+@import "../variables.css";
 
-:root {
-  /* Reutilizamos las MISMAS variables */
-  --color-bg: #0f0f10;
-  --color-surface: #1a1a1d;
-  --color-primary: #fe0032;
-  --color-text: #ffffff;
-  --color-text-muted: #a1a1aa;
-  --color-border: #2a2a2e;
-
-  --radius: 12px;
-}
-
-/* Reset ligero */
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
   padding: 2rem;
-
-  /* Admin debe ser CLARO */
-  background-color: #f5f5f5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5f5f5;
   color: #0f0f10;
 }
 
-/* ======================================
-   Header
-   ====================================== */
-
+/* ================= Header ================= */
 .admin-header {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .admin-header h1 {
-  font-size: 1.8rem;
+  grid-column: 2;
   margin: 0;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
-/* Botón atrás */
 .btn-back {
+  position: absolute;
+  left: 0;
   background: none;
   border: none;
   color: var(--color-primary);
-  font-size: 1rem;
   cursor: pointer;
-  padding: 0;
 }
 
-/* ======================================
-   Layout
-   ====================================== */
-
+/* ================= Layout ================= */
 .admin-main {
   max-width: 1200px;
   margin: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
-/* ======================================
-   Secciones
-   ====================================== */
+/* Desktop */
+@media (width > 768px) {
+  .admin-main {
+    grid-template-columns: 2fr 1fr;
+  }
 
+  .section-create {
+    grid-column: 1 / -1;
+  }
+
+  .admin-header h1 {
+  font-size: 2rem;
+}
+}
+
+/* ================= Cards ================= */
 section {
-  background: #ffffff;
+  background: #fff;
   border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 1.25rem;
   border: 1px solid #e5e5e5;
 }
 
@@ -82,22 +76,37 @@ section {
 
 .section-description {
   margin-top: 0.25rem;
-  color: #555555;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #555;
 }
 
-/* ======================================
-   Invitaciones (tarjetas)
-   ====================================== */
+/* Espaciado botón agregar acompañante */
+button.addCompanion.btn-secondary {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-success);  
+  background: var(--color-success);
+  color: #fff;
 
+}
+
+/* ================= Invitaciones ================= */
 .invitations-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (width > 768px) {
+  .invitations-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .invitation {
-  border: 1px solid #dddddd;
+  border: 1px solid #e5e5e5;
   border-radius: var(--radius);
   padding: 1rem;
   background: #fafafa;
@@ -105,33 +114,29 @@ section {
 
 .invitation-header {
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Campos */
+/* ================= Form ================= */
 .field {
   margin-bottom: 0.75rem;
 }
 
 label {
-  font-size: 0.85rem;
-  color: #555555;
+  font-size: 0.8rem;
+  color: #555;
 }
 
 input {
   width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
+  padding: 0.45rem 0.5rem;
   border-radius: 8px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
 }
 
-/* ======================================
-   Acompañantes
-   ====================================== */
-
+/* ================= Acompañantes ================= */
 .companions {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   padding-left: 0.5rem;
   border-left: 2px solid #e5e5e5;
 }
@@ -142,32 +147,42 @@ input {
   margin-top: 0.5rem;
 }
 
-/* ======================================
-   Botones
-   ====================================== */
-
-button {
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
+.row input {
+  flex: 1;
 }
 
-/* Acciones */
+.row button {
+  flex-shrink: 0;
+}
+
+/* ================= Acciones (FIX REAL) ================= */
 .actions-create {
+  grid-column: 1 / -1;              /* 🔑 sale del grid de tarjetas */
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
-/* Botón primario */
+/* Cancelar a la izquierda */
+.actions-create .btn-secondary:first-child {
+  margin-right: auto;
+}
+
+/* ================= Botones ================= */
+button {
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
 .btn-primary {
   background: var(--color-primary);
-  color: #ffffff;
+  color: #fff;
   border: none;
   padding: 0.6rem 1rem;
 }
 
-/* Botón secundario */
 .btn-secondary {
   background: transparent;
   color: var(--color-primary);
@@ -175,112 +190,13 @@ button {
   padding: 0.6rem 1rem;
 }
 
-/* Destructivo */
 .danger {
-  color: #b00020;
   background: none;
   border: none;
+  color: #b00020;
 }
 
-/* ======================================
-   Resultados
-   ====================================== */
-
-.results-list {
-  list-style: none;
-  padding: 0;
-}
-
-.results-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #e5e5e5;
-  font-size: 0.9rem;
-}
-
-/* ======================================
-   Feedback
-   ====================================== */
-
-.create-status {
-  margin-top: 1rem;
-  color: green;
-  font-weight: 500;
-}
-
-/* ======================================
-   Ajustes finos UX — Creación masiva
-   ====================================== */
-
-/* Lista de acompañantes */
-.companionList {
-  margin-top: 0.5rem;
-  margin-bottom: 0.75rem; /* 🔑 separación del botón */
-}
-
-/* Cada fila de acompañante */
-.row {
-  align-items: center;
-}
-
-/* Botón agregar acompañante */
-.addCompanion {
-  margin-top: 0.5rem;
-  align-self: flex-start; /* no estira todo el ancho */
-  font-size: 0.85rem;
-}
-
-/* Separación clara antes de eliminar invitación */
-.removeInvitation {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-}
-
-/* Hacer botón eliminar MÁS discreto */
-.removeInvitation.danger {
-  opacity: 0.8;
-}
-
-.removeInvitation.danger:hover {
-  opacity: 1;
-  text-decoration: underline;
-}
-
-/* Contador de acompañantes */
-.companions strong {
-  display: inline-block;
-  margin-bottom: 0.25rem;
-}
-
-/* Input + botón X alineados mejor */
-.row input {
-  flex: 1;
-}
-
-.row button {
-  flex-shrink: 0;
-  margin-top: 0; /* evita desalineación vertical */
-}
-
-/* Espaciado interno de la tarjeta */
-.invitation {
-  padding: 1.25rem; /* un poco más aire */
-}
-
-/* Título de la invitación */
-.invitation-header {
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-}
-
-/* Estados / mensajes */
-.create-status {
-  line-height: 1.4;
-}
-
-/* ======================================
-   Tabla de invitaciones creadas
-   ====================================== */
-
+/* ================= Resultados ================= */
 .results-table {
   width: 100%;
   border-collapse: collapse;
@@ -289,23 +205,18 @@ button {
 
 .results-table th,
 .results-table td {
-  text-align: left;
   padding: 0.75rem;
   border-bottom: 1px solid #e5e5e5;
   font-size: 0.9rem;
 }
 
 .results-table th {
-  background-color: #f0f0f0;
+  background: #f0f0f0;
   font-weight: 600;
 }
 
-.results-table .link {
-  color: var(--color-primary);
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.results-table .link:hover {
-  text-decoration: underline;
+/* ================= Feedback ================= */
+.create-status {
+  margin-top: 1rem;
+  font-weight: 500;
 }
