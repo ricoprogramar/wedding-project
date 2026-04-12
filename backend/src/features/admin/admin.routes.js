@@ -1,5 +1,6 @@
 // src/features/admin/admin.routes.js
 import express from "express";
+
 import {    
     createInvitationsBulk, 
     getInvitationByToken,
@@ -10,6 +11,17 @@ import {
 } from "./invitation.admin.controller.js";
 
 const router = express.Router();
+
+//Enpoint de login
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_KEY) {
+    return res.sendStatus(200);
+  }
+
+  return res.sendStatus(401);
+});
 
 // 🔹 1. LISTA primero
 router.get("/", listInvitations);

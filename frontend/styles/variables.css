@@ -6,6 +6,8 @@
   --color-text: #ffffff;
   --color-text-muted: #a1a1aa;
   --color-border: #2a2a2e;
+  --color-accent: #ffccd5;   /* acentos suaves */
+  --color-surface-soft: #222226;
 
   --radius: 12px;
 }

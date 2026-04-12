@@ -155,6 +155,33 @@ input {
   flex-shrink: 0;
 }
 
+/* Chips acompañantes */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 2px 4px 2px 0;
+  white-space: nowrap;
+}
+
+.chip--yes {
+  background: #e6f7ea;
+  color: #137a2a;
+}
+
+.chip--no {
+  background: #fdecea;
+  color: #b42318;
+}
+
+.chip--pending {
+  background: #f2f2f2;
+  color: #555;
+}
+
 /* ================= Acciones (FIX REAL) ================= */
 .actions-create {
   grid-column: 1 / -1;              /* 🔑 sale del grid de tarjetas */

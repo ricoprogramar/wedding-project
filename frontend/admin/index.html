@@ -1,0 +1,34 @@
+
+<!doctype html>
+  <title>Login Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/frontend/styles/admin/login.css" />
+</head>
+<body>
+  <div class="admin-login">
+    <h1>Acceso administrativo</h1>
+
+    <div class="field">
+      <label>Correo</label>
+      <input type="email" id="email" placeholder="admin@dominio.com">
+    </div>
+
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="password" placeholder="••••••••">
+    </div>
+
+    <div class="actions">
+      <button id="btnCancel" class="btn-secondary">Cancelar</button>
+      <button id="btnLogin" class="btn-primary">Ingresar</button>
+    </div>
+
+    <p id="error" class="create-status"></p>
+  </div>
+
+  <script type="module" src="/frontend/js/admin/login.js"></script>
+  
+</body>
+</html>
+
+

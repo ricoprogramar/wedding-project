@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./styles/components/gift.css" />
     <link rel="stylesheet" href="./styles/components/footer.css" />
     <link rel="stylesheet" href="./styles/components/modal.css" />
+    <link rel="stylesheet" href="./styles/photos/photos.css" />
   </head>
 
   <body>
@@ -36,9 +37,7 @@
           <a href="#tips" class="navbar__link">Tips</a>
           <a href="#vestimenta" class="navbar__link">Vestimenta</a>
           <a href="#regalos" class="navbar__link">Regalos</a>
-          <a href="#" class="navbar__link">Fotos</a>
-          <a href="/frontend/admin/invitation-form.html" class="navbar__link">Crear invitaciones</a>
-          <a href="/frontend/admin/invitation.html" class="navbar__link">Invitaciones</a>
+          <a href="#photos" class="navbar__link">Fotos</a>         
         </nav>
 
         <button class="btn btn--primary navbar__cta btn-confirm">
@@ -372,6 +371,53 @@
             Habrá una urna disponible para depositar tus regalos en la recepción
             de la fiesta.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+     RECUERDOS – FOTOS Y VIDEOS
+    ========================= -->
+    <section class="photos" id="photos">
+      <div class="photos__container">
+
+        <span class="photos__tag">Recuerdos</span>
+        <h2 class="photos__title">Fotos y videos del evento</h2>
+
+        <div class="photos__divider">
+          <span class="photos__line"></span>
+          <span class="photos__icon">❤</span>
+          <span class="photos__line"></span>
+        </div>
+
+        <p class="photos__subtitle">
+          Comparte los momentos que captures durante nuestra boda
+        </p>
+
+        <div class="photos__content">
+
+          <div class="photos-card">
+            <h3 class="photos-card__title">Escanea y comparte</h3>
+
+            <p class="photos-card__description">
+              Escanea este código QR o toca el botón para subir
+              tus fotos y videos del evento.
+            </p>
+
+            <div class="photos-card__qr">
+              <img
+                src="./assets/images/qr-fotos.png"
+                alt="QR fotos del evento"
+              />
+            </div>
+
+            <div class="photos-card__actions">
+              <a href="/frontend/photos/upload.html" class="btn btn--primary">
+                Subir fotos / videos
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

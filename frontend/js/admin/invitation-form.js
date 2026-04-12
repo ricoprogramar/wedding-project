@@ -1,3 +1,5 @@
+import "./guard.js";
+
 const container = document.getElementById("invitationsContainer");
 const addInvitationBtn = document.getElementById("addInvitation");
 const saveBtn = document.getElementById("saveInvitations");

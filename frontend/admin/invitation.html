@@ -3,25 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Invitaciones</title>
 
     <link rel="stylesheet" href="/frontend/styles/admin/invitation.css" />
   </head>
   <body>
     <section class="section-invitations-list">
-      <header class="section-header list-header">
-        <div>
-          <h2>Invitaciones creadas</h2>
-          <p class="section-description">
-            Administra invitaciones, revisa estados y corrige información si es
-            necesario.
-          </p>
-        </div>
+<header class="section-header list-header">
+  <div>
+    <h2>Gestión de invitaciones</h2>
+    <p class="section-description">
+      Administra invitaciones, revisa estados y corrige información si es necesario.
+    </p>
+  </div>
 
-        <button class="btn-primary" id="btnCreateInvitation">
-          + Crear invitación
-        </button>
-      </header>
+  <div class="header-actions">
+    <button class="btn-ghost" id="btnLogout">Salir</button> 
+    <button class="btn-primary" id="btnCreateInvitation">
+      + Crear invitación
+    </button>
+  </div>
+</header>
+
 
       <table class="admin-table">
         <thead>

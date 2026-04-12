@@ -1,4 +1,5 @@
 import { API_BASE } from "../config.js";
+import "./guard.js";
 
 // ✅ Función reutilizable para cargar invitaciones
 async function loadInvitations() {
@@ -18,18 +19,26 @@ async function loadInvitations() {
     invitations.forEach((invitation, index) => {
       const tr = document.createElement("tr");
 
-      // Acompañantes
       const companionsHtml =
         invitation.companions.length > 0
           ? invitation.companions
-              .map(
-                (c) => `
-          • ${c.name}
-          ${c.attending === true ? " ✅" : c.attending === false ? " ❌" : ""}
-        `,
-              )
-              .join("<br>")
-          : "<em>Sin acompañantes</em>";
+              .map((c) => {
+                const state =
+                  c.attending === true
+                    ? "status-dot status-dot--yes"
+                    : c.attending === false
+                      ? "status-dot status-dot--no"
+                      : "status-dot status-dot--pending";
+
+                return `
+            <div class="companion-item">
+              <span class="${state}"></span>
+              <span class="companion-name">${c.name}</span>
+            </div>
+          `;
+              })
+              .join("")
+          : `<em>Sin acompañantes</em>`;
 
       // Estado
       const statusHtml = invitation.confirmed
@@ -42,14 +51,21 @@ async function loadInvitations() {
         <td>${index + 1}</td>
 
         <td>
-          ${invitation.mainGuest.name}
-          ${
-            invitation.mainGuest.attending === true
-              ? " ✅"
-              : invitation.mainGuest.attending === false
-                ? " ❌"
-                : ""
-          }
+          ${(() => {
+            const state =
+              invitation.mainGuest.attending === true
+                ? "status-dot status-dot--yes"
+                : invitation.mainGuest.attending === false
+                  ? "status-dot status-dot--no"
+                  : "status-dot status-dot--pending";
+
+            return `
+              <div class="companion-item">
+                <span class="${state}"></span>
+                <span class="companion-name">${invitation.mainGuest.name}</span>
+              </div>
+            `;
+          })()}
         </td>
 
         <td>${companionsHtml}</td>
@@ -197,3 +213,9 @@ function showToast(message, duration = 1500) {
     toast.style.opacity = "0";
   }, duration);
 }
+
+// lógica logout
+document.getElementById("btnLogout")?.addEventListener("click", () => {
+  sessionStorage.removeItem("admin_auth");
+  window.location.href = "/frontend/";
+});

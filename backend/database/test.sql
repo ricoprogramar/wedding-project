@@ -1,3 +1,2 @@
-TRUNCATE TABLE attendance CASCADE;
-TRUNCATE TABLE guests CASCADE;
-TRUNCATE TABLE invitations CASCADE;
+UPDATE memories
+SET file_path = regexp_replace(file_path, '^.*uploads[/\\]', 'uploads/');

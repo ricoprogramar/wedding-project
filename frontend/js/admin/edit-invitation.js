@@ -1,5 +1,5 @@
 import { API_BASE } from "../config.js";
-
+import "./guard.js";
 let invitationId;
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       try {
         const res = await fetch(
-          `${API_BASE}/api/invitations/edit/${invitationId}/table`,
+          `${API_BASE}/api/invitation/edit/${invitationId}/table`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       try {
         const res = await fetch(
-          `${API_BASE}/api/invitations/edit/${invitationId}/active`,
+          `${API_BASE}/api/invitation/edit/${invitationId}/active`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

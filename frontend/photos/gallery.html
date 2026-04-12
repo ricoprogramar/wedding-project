@@ -1,0 +1,38 @@
+<!-- Galería (si está activa) -->
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Galería del evento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link rel="stylesheet" href="/frontend/styles/photos/photos.css">
+  <link rel="stylesheet" href="/frontend/styles/photos/gallery.css">
+
+</head>
+
+<body>
+  <section class="photos">
+    <div class="photos__container">
+
+      <span class="photos__tag">Recuerdos</span>
+      <h1 class="photos__title">Galería del evento</h1>
+
+      <div class="photos__divider">
+        <span class="photos__line"></span>
+        <span class="photos__icon">❤</span>
+        <span class="photos__line"></span>
+      </div>
+
+      <div class="photos__content">
+        <div id="gallery" class="photos-gallery"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <script type="module" src="/frontend/js/photos/gallery.js"></script>
+
+</body>
+</html>

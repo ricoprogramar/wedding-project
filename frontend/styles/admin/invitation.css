@@ -1,16 +1,20 @@
 @import "../variables.css";
+
 /* ======================================
-   Listado de invitaciones (alineado)
+   Listado de invitaciones
    ====================================== */
 
 .section-invitations-list {
   background: #ffffff;
   border-radius: var(--radius);
-  padding: 1.5rem;
   border: 1px solid #e5e5e5;
+  max-width: 1280px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
 }
 
-/* Tabla base */
+/* ================= Tabla ================= */
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -26,19 +30,18 @@
   vertical-align: top;
 }
 
-/* Header consistente con inputs */
 .admin-table th {
   background-color: #f5f5f5;
   font-weight: 600;
   color: #333;
 }
 
-/* Hover suave */
 .admin-table tbody tr:hover {
   background-color: #fafafa;
 }
 
-/* Estado RSVP */
+/* ================= Estado RSVP ================= */
+
 .status {
   display: inline-block;
   padding: 0.25rem 0.6rem;
@@ -57,14 +60,43 @@
   color: #92400e;
 }
 
-/* Acompañantes */
-.companions-list span {
-  display: block;
-  font-size: 0.85rem;
-  line-height: 1.4;
+/* ================= Acompañantes (FIX DEFINITIVO) ================= */
+
+.companion-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
 }
 
-/* Link copiar */
+.companion-name {
+  font-size: 0.85rem;
+  color: #222;
+  word-break: break-word;
+}
+
+/* Indicador visual de estado */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-dot--yes {
+  background: var(--color-success);
+}
+
+.status-dot--no {
+  background: #d92d20;
+}
+
+.status-dot--pending {
+  background: #aaa;
+}
+
+/* ================= Acciones ================= */
+
 .btn-link {
   background: none;
   border: none;
@@ -78,13 +110,6 @@
   text-decoration: underline;
 }
 
-/* Activa */
-.toggle-active {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-
-/* Editar */
 .icon-button {
   background: none;
   border: none;
@@ -98,15 +123,34 @@
   opacity: 1;
 }
 
+/* ================= Header ================= */
+
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* ==============================
-   SWITCH (LISTAR + EDITAR)
-   ============================== */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  text-decoration: underline;
+}
+
+/* ================= Switch ================= */
+
 .status-toggle {
   position: relative;
   display: inline-block;
@@ -151,8 +195,8 @@
   transform: translateX(20px);
 }
 
-/* Botón primario (Crear invitación) */
-/* Botón crear invitación (verde) */
+/* ================= Botones ================= */
+
 .btn-primary {
   background: var(--color-success);
   color: #ffffff;
@@ -165,4 +209,12 @@
 
 .btn-primary:hover {
   opacity: 0.9;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
 }
