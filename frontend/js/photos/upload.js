@@ -93,3 +93,15 @@ btnUpload?.addEventListener("click", async () => {
 backBtn?.addEventListener("click", () => {
   window.location.href = "/frontend/index.html#photos";
 });
+
+const {
+  rows: [cfg],
+} = await pool.query(
+  "SELECT enabled, start_at, end_at FROM memories_config WHERE id=1",
+);
+const now = new Date();
+if (!cfg.enabled) return res.status(403).json({ error: "Subidas cerradas" });
+if (cfg.start_at && now < cfg.start_at)
+  return res.status(403).json({ error: "Aún no inicia" });
+if (cfg.end_at && now > cfg.end_at)
+  return res.status(403).json({ error: "Subidas finalizadas" });

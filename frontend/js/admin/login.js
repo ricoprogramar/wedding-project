@@ -74,7 +74,7 @@ async function handleLogin() {
   }
 
   sessionStorage.setItem("admin_auth", "true");
-  window.location.href = "/frontend/admin/invitation.html";
+  window.location.href = "/frontend/admin/index.html";
 }
 
 // Click normal

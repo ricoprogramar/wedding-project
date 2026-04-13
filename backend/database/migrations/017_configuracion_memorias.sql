@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS memories_config (
+  id INT PRIMARY KEY DEFAULT 1,
+  enabled BOOLEAN NOT NULL DEFAULT true,
+  start_at TIMESTAMP NULL,
+  end_at TIMESTAMP NULL
+);
+
+INSERT INTO memories_config (id) VALUES (1)
+ON CONFLICT (id) DO NOTHING;

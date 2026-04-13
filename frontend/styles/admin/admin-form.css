@@ -1,0 +1,133 @@
+@import "../variables.css";
+
+/* =========================
+   BASE ADMIN FORMS
+========================= */
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+}
+
+/* Header */
+.admin-header {
+  max-width: 1100px;
+  margin: 2rem auto 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-header h1 {
+  margin: 0 auto;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Main container */
+.admin-main {
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+}
+
+/* Section card */
+.section-create,
+.section-results {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Section header */
+.section-header h2 {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+}
+
+.section-description {
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Fields */
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  color: var(--color-text);
+}
+
+/* Invitations cards */
+.invitation {
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Actions */
+.actions-create {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.actions-create .btn-primary {
+  margin-left: auto;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+}
+
+/* Results table */
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.results-table th,
+.results-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.results-table th {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-bold);
+}

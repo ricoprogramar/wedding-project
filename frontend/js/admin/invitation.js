@@ -154,7 +154,7 @@ async function loadInvitations() {
 
       // Ir a editar
       tr.querySelector(".edit-invitation").addEventListener("click", () => {
-        window.location.href = `/frontend/admin/edit-invitation.html?id=${invitation.id}`;
+        window.location.href = `/frontend/admin/invitation/edit-invitation.html?id=${invitation.id}`;
       });
 
       tableBody.appendChild(tr);
@@ -179,7 +179,7 @@ window.addEventListener("pageshow", () => {
   document
     .getElementById("btnCreateInvitation")
     ?.addEventListener("click", () => {
-      window.location.href = "/frontend/admin/invitation-form.html";
+      window.location.href = "/frontend/admin/invitation/invitation-form.html";
     });
 });
 

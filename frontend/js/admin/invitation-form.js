@@ -59,19 +59,31 @@ function createInvitationBlock() {
       <input class="table" placeholder="Ej: Mesa 3, Mesa 12..." />
     </div>
 
-    <div class="companions">
-      <strong>
-        Acompañantes (<span class="companion-count">0</span>)
-      </strong>
-      <div class="companionList"></div>
-      <button type="button" class="addCompanion btn-secondary">
-        + Agregar acompañante
-      </button>
-    </div>
+    
+<div class="companions">
+  <strong>
+    Acompañantes (<span class="companion-count">0</span>)
+  </strong>
 
-    <button type="button" class="danger removeInvitation">
+  <div class="companionList"></div>
+
+  <div class="invitation-actions">
+    <button
+      type="button"
+      class="btn btn--danger removeInvitation"
+    >
       Eliminar invitación
     </button>
+
+    <button
+      type="button"
+      class="btn btn--primary addCompanion"
+    >
+      + Agregar acompañante
+    </button>
+  </div>
+</div>
+
   `;
 
   const companionList = div.querySelector(".companionList");

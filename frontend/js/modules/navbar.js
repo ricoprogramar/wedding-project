@@ -65,7 +65,7 @@ export function initNavbar() {
 
       if (clicks === 5) {
         clicks = 0;
-        window.location.href = "/frontend/admin/index.html";
+        window.location.href = "/frontend/admin/login.html";
       }
     });
   }

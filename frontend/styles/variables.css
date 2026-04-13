@@ -9,5 +9,12 @@
   --color-accent: #ffccd5;   /* acentos suaves */
   --color-surface-soft: #222226;
 
-  --radius: 12px;
+  --radius: 6px;
+
+  
+
+  --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
 }

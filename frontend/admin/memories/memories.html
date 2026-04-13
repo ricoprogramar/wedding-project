@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Configurar Recuerdos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css" />
+</head>
+
+<body>
+  <header class="admin-header">
+    <button class="btn-back" onclick="history.back()">← Volver</button>
+    <h1>Recuerdos</h1>
+  </header>
+
+  <main class="admin-main">
+    <section class="section-create">
+      <header class="section-header">
+        <h2>Configuración de recuerdos</h2>
+        <p class="section-description">
+          Controla cuándo los invitados pueden subir fotos y videos.
+        </p>
+      </header>
+
+      <div class="field">
+        <label>
+          <input type="checkbox" id="enabled" />
+          Recuerdos activos
+        </label>
+      </div>
+
+      <div class="field">
+        <label>Fecha inicio</label>
+        <input type="datetime-local" id="start_at" />
+      </div>
+
+      <div class="field">
+        <label>Fecha fin</label>
+        <input type="datetime-local" id="end_at" />
+      </div>
+
+      <div class="actions-create">
+        <button class="btn-primary" id="save">Guardar cambios</button>
+      </div>
+
+      <p id="status" class="create-status"></p>
+    </section>
+  </main>
+
+  <script type="module" src="/frontend/js/admin/memories.js"></script>
+</body>
+</html>

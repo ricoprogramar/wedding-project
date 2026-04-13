@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <title>Crear Invitaciones</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css" />
+    <link rel="stylesheet" href="/frontend/styles/admin/admin-form.css" />
+    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
   </head>
 
   <body>
@@ -39,18 +42,20 @@
         </div>
 
         <!-- Actions -->
-        <div class="actions-create">
-          <button id="cancelCreate" type="button" class="btn-secondary">
+        <div class="actions-invitation">
+          <button id="cancelCreate" type="button" class="btn btn--danger">
             Cancelar
           </button>
 
-          <button id="addInvitation" type="button" class="btn-secondary">
-            ➕ Agregar invitación
-          </button>
+          <div class="actions-create">
+            <button id="addInvitation" type="button" class="btn btn--ghost">
+              ➕ Agregar invitación
+            </button>
 
-          <button id="saveInvitations" type="button" class="btn-primary">
-            💾 Guardar todas las invitaciones
-          </button>
+            <button id="saveInvitations" type="button" class="btn btn--ghost">
+              💾 Guardar todas las invitaciones
+            </button>
+          </div>
         </div>
 
         <!-- Feedback -->

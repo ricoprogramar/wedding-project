@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         if (!res.ok) throw new Error();
-        window.location.href = "/frontend/admin/invitation.html";
+        window.location.href = "/frontend/admin/invitation/invitation.html";
       } catch {
         alert("No se pudo actualizar la mesa");
       }
