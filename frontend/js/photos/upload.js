@@ -1,6 +1,10 @@
 import { API_BASE } from "../config.js";
-// frontend/photos/upload.js
-// Subida múltiple con preview + UX correcto (máx 10)
+
+const modal = document.getElementById("upload-modal");
+const modalMessage = document.getElementById("modal-message");
+const modalClose = document.getElementById("modal-close");
+
+const statusMsg = document.getElementById("upload-status");
 
 const input = document.getElementById("files");
 const btnSelect = document.getElementById("btnSelectFiles");
@@ -10,7 +14,40 @@ const backBtn = document.getElementById("back-home");
 
 const MAX_FILES = 10;
 
-// FIX: asegurar token global (URL o sessionStorage)
+/* =====================
+   Habilitar / Deshabilitar
+===================== */
+function disableUpload(message) {
+  btnUpload.disabled = true;
+  btnSelect.disabled = true;
+  btnUpload.classList.add("btn-disabled");
+  btnSelect.classList.add("btn-disabled");
+  statusMsg.textContent = message;
+}
+
+function enableUpload() {
+  btnUpload.disabled = false;
+  btnSelect.disabled = false;
+  btnUpload.classList.remove("btn-disabled");
+  btnSelect.classList.remove("btn-disabled");
+  statusMsg.textContent = "";
+}
+
+/* =====================
+   Modal
+===================== */
+function showModal(message) {
+  modalMessage.textContent = message;
+  modal.classList.remove("hidden");
+}
+
+modalClose?.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+/* =====================
+   Token
+===================== */
 function getToken() {
   const params = new URLSearchParams(window.location.search);
   return (
@@ -18,13 +55,18 @@ function getToken() {
   );
 }
 
-// Abrir selector
-btnSelect?.addEventListener("click", () => input?.click());
+/* =====================
+   Selector
+===================== */
+btnSelect?.addEventListener("click", () => {
+  if (!btnSelect.disabled) input?.click();
+});
 
-// Render preview
+/* =====================
+   Preview
+===================== */
 function renderPreview(files) {
   preview.innerHTML = "";
-
   [...files].forEach((file) => {
     const url = URL.createObjectURL(file);
     const isVideo = file.type.startsWith("video/");
@@ -35,27 +77,27 @@ function renderPreview(files) {
   });
 }
 
-// ✅ UX correcto: recortar a 10 SIN resetear todo
 input?.addEventListener("change", () => {
   const filesArr = Array.from(input.files);
-
   if (filesArr.length > MAX_FILES) {
-    alert(`Máximo ${MAX_FILES} archivos. Se usarán los primeros ${MAX_FILES}.`);
+    alert(`Máximo ${MAX_FILES} archivos. Se usarán los primeros.`);
   }
-
   const kept = filesArr.slice(0, MAX_FILES);
   const dt = new DataTransfer();
   kept.forEach((f) => dt.items.add(f));
   input.files = dt.files;
-
   renderPreview(input.files);
 });
 
-// Subir real (robusto)
+/* =====================
+   Subir archivos
+===================== */
 btnUpload?.addEventListener("click", async () => {
+  if (btnUpload.disabled) return;
+
   const files = input.files;
   if (!files || files.length === 0) {
-    alert("Selecciona al menos un archivo");
+    showModal("Selecciona al menos un archivo.");
     return;
   }
 
@@ -69,39 +111,71 @@ btnUpload?.addEventListener("click", async () => {
       body: form,
     });
 
-    const text = await res.text(); // ✅ lee texto primero
+    const text = await res.text();
+
     if (!res.ok) {
-      // intenta JSON; si falla, muestra texto
+      let message = "Error al subir archivos";
       try {
         const err = JSON.parse(text);
-        throw new Error(err.error || "Error al subir");
-      } catch {
-        throw new Error(text || "Error al subir");
+        message = err.error || message;
+      } catch {}
+
+      if (res.status === 403) {
+        showModal(message);
+        return;
       }
+
+      showModal(message);
+      return;
     }
 
-    const data = JSON.parse(text); // ✅ parsea solo si OK
-    alert(`✅ ${data.count} archivos subidos`);
+    const data = JSON.parse(text);
+    showModal(`✅ ${data.count} archivos subidos correctamente`);
     input.value = "";
     preview.innerHTML = "";
-  } catch (e) {
-    alert(e.message || "Error al subir");
+  } catch {
+    showModal("No se pudo subir los archivos. Intenta nuevamente.");
   }
 });
 
-// Volver a la sección Fotos
+/* =====================
+   Volver
+===================== */
 backBtn?.addEventListener("click", () => {
   window.location.href = "/frontend/index.html#photos";
 });
 
-const {
-  rows: [cfg],
-} = await pool.query(
-  "SELECT enabled, start_at, end_at FROM memories_config WHERE id=1",
-);
-const now = new Date();
-if (!cfg.enabled) return res.status(403).json({ error: "Subidas cerradas" });
-if (cfg.start_at && now < cfg.start_at)
-  return res.status(403).json({ error: "Aún no inicia" });
-if (cfg.end_at && now > cfg.end_at)
-  return res.status(403).json({ error: "Subidas finalizadas" });
+/* =====================
+   Verificar disponibilidad
+===================== */
+(async function checkUploadAvailability() {
+  try {
+    const res = await fetch(`${API_BASE}/api/memories/config`);
+    const cfg = await res.json();
+
+    const now = new Date();
+    const startAt = cfg.start_at ? new Date(cfg.start_at) : null;
+    const endAt = cfg.end_at ? new Date(cfg.end_at) : null;
+
+    if (!cfg.enabled) {
+      disableUpload("Las subidas de recuerdos están desactivadas.");
+      return;
+    }
+
+    if (startAt && now < startAt) {
+      disableUpload(
+        `Podrás subir archivos a partir del ${startAt.toLocaleString()}`,
+      );
+      return;
+    }
+
+    if (endAt && now > endAt) {
+      disableUpload("El período para subir recuerdos ya finalizó.");
+      return;
+    }
+
+    enableUpload();
+  } catch {
+    disableUpload("No se pudo verificar el estado de las subidas.");
+  }
+})();

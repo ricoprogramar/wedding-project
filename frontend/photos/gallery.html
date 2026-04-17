@@ -2,37 +2,44 @@
 
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Galería del evento</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <link rel="stylesheet" href="/frontend/styles/photos/photos.css">
-  <link rel="stylesheet" href="/frontend/styles/photos/gallery.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Galería del evento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-</head>
+    <link rel="stylesheet" href="/frontend/styles/photos/photos.css" />
+    <link rel="stylesheet" href="/frontend/styles/photos/gallery.css" />
+    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 
-<body>
-  <section class="photos">
-    <div class="photos__container">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/frontend/js/ui/icons.js"></script>
+  </head>
 
-      <span class="photos__tag">Recuerdos</span>
-      <h1 class="photos__title">Galería del evento</h1>
+  <body class="view-public">
 
-      <div class="photos__divider">
-        <span class="photos__line"></span>
-        <span class="photos__icon">❤</span>
-        <span class="photos__line"></span>
+    <button class="btn-icon btn-icon--primary back-btn" data-back>
+      <i data-lucide="arrow-left"></i>
+    </button>
+
+    <section class="photos">
+      <div class="photos__container">
+        <div>
+          <span class="photos__tag">Recuerdos</span>
+          <h1 class="photos__title">Galería del evento</h1>
+        </div>
+
+        <div class="photos__divider">
+          <span class="photos__line"></span>
+          <span class="photos__icon">❤</span>
+          <span class="photos__line"></span>
+        </div>
+
+        <div class="photos__content">
+          <div id="gallery" class="photos-gallery"></div>
+        </div>
       </div>
+    </section>
 
-      <div class="photos__content">
-        <div id="gallery" class="photos-gallery"></div>
-      </div>
-
-    </div>
-  </section>
-
-  <script type="module" src="/frontend/js/photos/gallery.js"></script>
-
-</body>
+    <script type="module" src="/frontend/js/photos/gallery.js"></script>
+  </body>
 </html>

@@ -105,7 +105,6 @@ async function loadInvitations() {
       `;
 
       // Activar desactivar invitación
-
       tr.querySelector(".toggle-active").addEventListener(
         "change",
         async (e) => {
@@ -214,8 +213,7 @@ function showToast(message, duration = 1500) {
   }, duration);
 }
 
-// lógica logout
-document.getElementById("btnLogout")?.addEventListener("click", () => {
-  sessionStorage.removeItem("admin_auth");
-  window.location.href = "/frontend/";
+// lógica logout ir atrás
+document.getElementById("btnLogout")?.addEventListener("click", () => {  
+  window.location.href = "/frontend/admin/index.html";
 });

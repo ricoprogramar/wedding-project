@@ -8,6 +8,11 @@ body {
   font-weight: var(--font-weight-regular);
 }
 
+.photos {
+  padding: 1rem;
+  border: none;
+}
+
 /* Título principal */
 .photos__title {
   font-family: var(--font-family-base);
@@ -70,3 +75,4 @@ body {
   transform: scale(1.02);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
 }
+

@@ -60,3 +60,42 @@ body {
   left: 24px;
   z-index: 10;
 }
+
+/* ===== Modal ===== */
+.modal.hidden {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.modal-card {
+  position: relative;
+  max-width: 420px;
+  margin: 15vh auto;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.modal-card h3 {
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.modal-card p {
+  color: var(--color-text-muted);
+  margin: 1rem 0 1.5rem;
+}

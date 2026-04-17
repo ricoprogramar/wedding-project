@@ -1,3 +1,5 @@
+// Vista para administrar las imagenes que se muestran en la galería
+
 import "./guard.js";
 import { API_BASE } from "../config.js";
 

@@ -5,26 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invitaciones</title>
 
+    <!-- <link rel="stylesheet" href="/frontend/styles/admin/invitation.css" /> -->
+    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
     <link rel="stylesheet" href="/frontend/styles/admin/invitation.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/frontend/js/ui/icons.js"></script>
   </head>
-  <body>
-    <section class="section-invitations-list">
-<header class="section-header list-header">
-  <div>
-    <h2>Gestión de invitaciones</h2>
-    <p class="section-description">
-      Administra invitaciones, revisa estados y corrige información si es necesario.
-    </p>
-  </div>
 
-  <div class="header-actions">
-    <button class="btn-ghost" id="btnLogout">Salir</button> 
-    <button class="btn-primary" id="btnCreateInvitation">
-      + Crear invitación
+  <body class="view-admin">
+    
+    <button class="btn-icon btn-icon--primary back-btn" data-back>
+      <i data-lucide="arrow-left"></i>
     </button>
-  </div>
-</header>
 
+    <section class="section-invitations-list">
+      <header class="section-header list-header">
+        <div>
+          <h2>Gestión de invitaciones</h2>
+          <p class="section-description">
+            Administra invitaciones, revisa estados y corrige información si es
+            necesario.
+          </p>
+        </div>
+        <!-- Esta clase controla las acciones del formulario -->
+        <div class="header-actions">
+          <button class="btn btn--danger" id="btnLogout">Volver</button>
+          <button class="btn btn--primary-green" id="btnCreateInvitation">
+            + Crear invitación
+          </button>
+        </div>
+      </header>
 
       <table class="admin-table">
         <thead>

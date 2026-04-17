@@ -1,7 +1,7 @@
 @import "../variables.css";
 
 /* Layout base */
-.admin-layout {
+.view-admin {
   min-height: 100vh;
   display: flex;
   background: var(--color-bg);
@@ -55,4 +55,18 @@
 
 .admin-muted {
   color: var(--color-text-muted);
+}
+
+/* Logout */
+.admin-logout {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Topbar admin (posición global) */
+.admin-topbar {
+  position: fixed;   /* 🔑 sale del flujo */
+  top: 2rem;         /* ✅ margen superior */
+  right: 2rem;       /* ✅ margen derecho */
+  z-index: 1000;
 }

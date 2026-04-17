@@ -77,7 +77,7 @@ function createInvitationBlock() {
 
     <button
       type="button"
-      class="btn btn--primary addCompanion"
+      class="btn btn--primary-green addCompanion"
     >
       + Agregar acompañante
     </button>

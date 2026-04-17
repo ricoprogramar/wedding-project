@@ -1,52 +1,57 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Configurar Recuerdos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Configurar Recuerdos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<body>
-  <header class="admin-header">
-    <button class="btn-back" onclick="history.back()">← Volver</button>
-    <h1>Recuerdos</h1>
-  </header>
+    <link rel="stylesheet" href="/frontend/styles/admin/memories.css" />
+    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 
-  <main class="admin-main">
-    <section class="section-create">
-      <header class="section-header">
-        <h2>Configuración de recuerdos</h2>
-        <p class="section-description">
-          Controla cuándo los invitados pueden subir fotos y videos.
-        </p>
-      </header>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/frontend/js/ui/icons.js"></script>
+  </head>
 
-      <div class="field">
-        <label>
-          <input type="checkbox" id="enabled" />
-          Recuerdos activos
-        </label>
-      </div>
+  <body class="view-admin">
 
-      <div class="field">
-        <label>Fecha inicio</label>
-        <input type="datetime-local" id="start_at" />
-      </div>
+    <button class="btn-icon btn-icon--primary back-btn" data-back>
+      <i data-lucide="arrow-left"></i>
+    </button>
+  
+    <main class="admin-main">
+      <section class="section-create">
+        <header class="section-header">
+          <h2>Configuración de recuerdos</h2>
+          <p class="section-description">
+            Controla cuándo los invitados pueden subir fotos y videos.
+          </p>
+        </header>
 
-      <div class="field">
-        <label>Fecha fin</label>
-        <input type="datetime-local" id="end_at" />
-      </div>
+        <div class="field">
+          <label>
+            <input type="checkbox" id="enabled" />
+            Recuerdos activos
+          </label>
+        </div>
 
-      <div class="actions-create">
-        <button class="btn-primary" id="save">Guardar cambios</button>
-      </div>
+        <div class="field">
+          <label>Fecha inicio</label>
+          <input type="datetime-local" id="start_at" />
+        </div>
 
-      <p id="status" class="create-status"></p>
-    </section>
-  </main>
+        <div class="field">
+          <label>Fecha fin</label>
+          <input type="datetime-local" id="end_at" />
+        </div>
 
-  <script type="module" src="/frontend/js/admin/memories.js"></script>
-</body>
+        <div class="actions-create">
+          <button class="btn btn--ghost" id="save">Guardar cambios</button>
+        </div>
+
+        <p id="status" class="create-status"></p>
+      </section>
+    </main>
+
+    <script type="module" src="/frontend/js/admin/memories.js"></script>
+  </body>
 </html>

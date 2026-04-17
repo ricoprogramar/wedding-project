@@ -1,25 +1,38 @@
+<!-- Vista para administrar las imagenes que se muestran en la galería -->
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Moderación de recuerdos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/frontend/styles/admin/invitation-form.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Moderación de recuerdos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<body>
-  <header class="admin-header">
-    <button class="btn-back" onclick="history.back()">← Volver</button>
-    <h1>Recuerdos</h1>
-  </header>
+    <link
+      rel="stylesheet"
+      href="/frontend/styles/admin/memories-moderation.css"/>
+    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 
-  <main class="admin-main">
-    <section class="section-create">
-      <h2>Moderación de recuerdos</h2>
-      <div id="list"></div>
-    </section>
-  </main>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/frontend/js/ui/icons.js"></script>
+  </head>
 
-  <script type="module" src="/frontend/js/admin/memories-moderation.js"></script>
-</body>
+  <body class="view-admin">
+    <header class="admin-header">
+      <button class="btn-icon btn-icon--primary back-btn" data-back>
+        <i data-lucide="arrow-left"></i>
+      </button>
+      <h1 class="admin-header__title">Recuerdos</h1>
+    </header>
+
+    <main class="admin-main">
+      <section class="section-create">
+        <h2>Moderación de recuerdos</h2>
+        <div id="list"></div>
+      </section>
+    </main>
+
+    <script
+      type="module"
+      src="/frontend/js/admin/memories-moderation.js"
+    ></script>
+  </body>
 </html>

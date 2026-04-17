@@ -1,5 +1,5 @@
 /* buttons.css */
-.btn {  
+.btn {
   border-radius: var(--radius);
   border: none;
   cursor: pointer;
@@ -13,6 +13,13 @@
   border: solid 1px rgba(255, 255, 255, 0.4);
 }
 
+/* Botón agregar acompañante */
+.btn--primary-green {
+  padding: 0.75rem 0.75rem;
+  background: var(--color-success);
+  color: #fff;
+}
+
 .btn--outline {
   background-color: transparent;
   border: 1px solid var(--color-border);
@@ -24,7 +31,7 @@
   border: none;
   font-size: 1rem;
   cursor: pointer;
-  margin-bottom: 2rem;
+  margin: 2rem;
   color: var(--color-primary);
   font-weight: 600;
   border: solid 1px var(--color-primary);
@@ -32,16 +39,12 @@
   border-radius: 6px;
 }
 
-.btn-back:hover, .btn:hover
-{
-    /* sombra más visible */
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
-
-  border: solid 1px white;
-
-  /* ligera elevación */
-  transform: translateY(-1px);
+.btn-back:hover,
+.btn:hover {
   
+  /* sombra más visible */
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  /* border: solid 1px white; */
 }
 
 .btn-disabled {
@@ -56,7 +59,7 @@
 .btn--danger {
   padding: 0.5rem 1rem;
   background-color: transparent;
-  border: 1px solid #b00020;  
+  border: 1px solid #b00020;
   color: #b00020;
 }
 
@@ -64,7 +67,6 @@
   background-color: #000;
   color: var(--color-primary);
 }
-
 
 /* =========================
    Botón ghost / inverse
@@ -77,11 +79,87 @@
 }
 
 .btn--ghost:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: black;
 }
-/* 
-btn--primary → acción principal
-btn--danger → destructiva
-btn--ghost → navegación / volver
-btn--outline → secundaria */
 
+/* =========================
+   Botón ícono (Lucide)
+========================= */
+
+.btn-icon {
+  background: transparent;
+  border: 1px solid transparent; /* ✅ reserva espacio */
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Hover */
+.btn-icon:hover {
+
+  /* sombra más visible */
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  border: solid 1px white;
+}
+
+/* Posición */
+.back-btn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+/* ===== FIX REAL LUCIDE ===== */
+.btn-icon svg {
+  width: 40px !important;
+  height: 40px !important;
+  stroke-width: 2.5;
+  fill: none;
+}
+
+/* Color blanco por defecto */
+.btn-icon {
+  color: var(--color-text);
+}
+
+/* Variante roja */
+.btn-icon--primary {
+  color: var(--color-primary);
+}
+
+/* ===== Público (galería, upload) ===== */
+.view-public .back-btn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.view-public .back-btn svg {
+  width: 48px;
+  height: 48px;
+}
+
+.view-public .back-btn {
+  color: var(--color-primary);
+}
+
+/* ===== Admin ===== */
+.view-admin .back-btn {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.view-admin .back-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.view-admin .back-btn {
+  color: var(--color-text-muted);
+}
+
+.view-admin .back-btn:hover {
+  color: var(--color-text);
+}

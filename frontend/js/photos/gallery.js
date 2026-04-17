@@ -2,6 +2,8 @@
 import { API_BASE } from "../config.js";
 
 const container = document.getElementById("gallery");
+  
+const backBtn = document.getElementById("gallery-back");
 
 fetch(`${API_BASE}/api/memories/list`)
   .then((res) => res.json())
@@ -24,3 +26,9 @@ fetch(`${API_BASE}/api/memories/list`)
   .catch(() => {
     container.innerHTML = "<p>Error cargando la galería.</p>";
   });
+
+
+
+backBtn?.addEventListener("click", () => {
+  history.back();
+});

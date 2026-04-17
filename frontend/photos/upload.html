@@ -30,6 +30,8 @@
         Máximo <strong>10 archivos</strong> por vez.
       </p>
 
+      <p id="upload-status" class="photos__subtitle"></p>
+
       <div class="photos__content">
         <div class="photos-card photos-upload-card">
 
@@ -69,6 +71,21 @@
 
     </div>
   </section>
+
+    <!-- Modal de estado de subida -->
+  <div id="upload-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+
+    <div class="modal-card">
+      <h3 id="modal-title">Subidas no disponibles</h3>
+      <p id="modal-message"></p>
+
+      <button id="modal-close" class="btn btn--ghost">
+        Entendido
+      </button>
+    </div>
+  </div>
+
 
   <script type="module" src="/frontend/js/photos/upload.js"></script>
 </body>

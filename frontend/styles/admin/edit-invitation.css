@@ -168,14 +168,14 @@ input {
 }
 
 /* Buttons */
-.btn-primary {
-  background: var(--color-primary);
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  .btn-primary {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 
 .btn-secondary {
   background: transparent;

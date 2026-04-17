@@ -1,0 +1,91 @@
+@import "../variables.css";
+
+/* Fondo consistente */
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+}
+
+.admin-header h1{
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Contenedor más estrecho */
+.admin-main {
+  max-width: 520px;
+  margin: 3rem auto;
+}
+
+/* Card de settings */
+.section-create {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+/* Header */
+.section-header h2 {
+  font-weight: var(--font-weight-bold);
+}
+
+.section-description {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* Campos compactos */
+.field {
+  margin-top: 1rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Inputs */
+input[type="datetime-local"] {
+  width: 100%;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  color: var(--color-text);
+}
+
+/* Checkbox simple (settings) */
+.field label input[type="checkbox"] {
+  margin-right: 0.5rem;
+  transform: scale(1.1);
+}
+
+/* Acciones */
+.actions-create {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Estado */
+.create-status {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Iconos del datetime en blanco */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+
+/* Altura mínima para campos de fecha */
+input[type="datetime-local"] {
+  min-height: 40px;
+  height: 40px;
+  padding: 0 0.6rem;
+}

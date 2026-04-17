@@ -7,16 +7,42 @@ const endAt = document.getElementById("end_at");
 const status = document.getElementById("status");
 const saveBtn = document.getElementById("save");
 
-// Cargar config actual
+/**
+ * Convierte 'YYYY-MM-DDTHH:mm' (datetime-local)
+ * a 'YYYY-MM-DD HH:mm:ss' (TIMESTAMP WITHOUT TIME ZONE)
+ */
+function toLocalTimestamp(value) {
+  if (!value) return null;
+  return value.replace("T", " ") + ":00";
+}
+
+/**
+ * Convierte 'YYYY-MM-DD HH:mm:ss'
+ * a 'YYYY-MM-DDTHH:mm' para datetime-local
+ */
+function fromLocalTimestamp(value) {
+  if (!value) return "";
+  return value.replace(" ", "T").slice(0, 16);
+}
+
+// =====================
+// Cargar configuración
+// =====================
 fetch(`${API_BASE}/api/memories/config`)
   .then((r) => r.json())
   .then((cfg) => {
-    enabled.checked = cfg.enabled;
-    startAt.value = cfg.start_at ? cfg.start_at.slice(0, 16) : "";
-    endAt.value = cfg.end_at ? cfg.end_at.slice(0, 16) : "";
+    enabled.checked = !!cfg.enabled;
+    startAt.value = fromLocalTimestamp(cfg.start_at);
+    endAt.value = fromLocalTimestamp(cfg.end_at);
+  })
+  .catch(() => {
+    status.textContent = "Error cargando configuración";
+    status.style.color = "red";
   });
 
-// Guardar
+// =====================
+// Guardar configuración
+// =====================
 saveBtn.addEventListener("click", async () => {
   status.textContent = "";
 
@@ -25,17 +51,17 @@ saveBtn.addEventListener("click", async () => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       enabled: enabled.checked,
-      start_at: startAt.value || null,
-      end_at: endAt.value || null,
+      start_at: toLocalTimestamp(startAt.value),
+      end_at: toLocalTimestamp(endAt.value),
     }),
   });
 
   if (!res.ok) {
-    status.textContent = "❌ Error al guardar";
+    status.textContent = "Error al guardar";
     status.style.color = "red";
     return;
   }
 
-  status.textContent = "✅ Configuración guardada";
+  status.textContent = "Configuración guardada";
   status.style.color = "green";
 });

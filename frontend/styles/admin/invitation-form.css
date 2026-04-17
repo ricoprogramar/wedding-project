@@ -24,15 +24,6 @@
   font-weight: var(--font-weight-bold);
 }
 
-.btn-back {
-  position: absolute;
-  left: 0;
-  background: none;
-  border: none;
-  color: var(--color-primary);
-  cursor: pointer;
-}
-
 /* ================= Layout ================= */
 .admin-main {
   display: grid;
@@ -117,13 +108,6 @@
 
 .row button {
   flex-shrink: 0;
-}
-
-/* Botón agregar acompañante */
-button.addCompanion {
-  padding: 0.75rem 0.75rem;
-  background: var(--color-success);
-  color: #fff;
 }
 
 /* ================= Chips acompañantes ================= */
@@ -229,4 +213,5 @@ button.addCompanion {
   font-size: 1.25rem;
 }
   
+
 }

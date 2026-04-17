@@ -1,38 +1,51 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Panel administrativo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Panel administrativo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="/frontend/styles/variables.css">
-  <link rel="stylesheet" href="/frontend/styles/admin/admin-shell.css">
+    <link rel="stylesheet" href="/frontend/styles/variables.css" />
+    <link rel="stylesheet" href="/frontend/styles/admin/admin-shell.css" />
+    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 
+  </head>
+
+  <body class="view-admin">
   
-</head>
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-logo">RicoProgramar</div>
 
-<body class="admin-layout">
-  <!-- Sidebar -->
-  <aside class="admin-sidebar">
-    <div class="admin-logo">
-      RicoProgramar
-    </div>
+      <nav class="admin-nav">
+        <a href="../admin/invitation/invitation.html">Invitaciones</a>
+        <a href="/frontend/photos/gallery.html">Galería</a>
+        <a href="../admin/memories/memories.html">Config. - Recuerdos</a>
+        <a href="../admin/memories/memories-moderation.html">Config. Galería</a>
+      </nav>
+    </aside>
 
-    <nav class="admin-nav">
-      <a href="../admin/invitation/invitation.html">Invitaciones</a>
-      
-      <a href="../admin/memories/memories.html">Recuerdos</a>
+    <header class="admin-topbar">
+      <button
+        id="btnLogout"
+        class="btn btn--ghost admin-logout"
+        title="Cerrar sesión"
+      >
+        Salir
+      </button>
+    </header>
 
-      <a href="/frontend/photos/gallery.html">Galería</a>
-    </nav>
-  </aside>
+    <!-- Contenido -->
+    <main class="admin-content">
+      <h1>Panel administrativo</h1>
+      <p class="admin-muted">Selecciona una opción del menú.</p>
+    </main>
 
-  <!-- Contenido -->
-  <main class="admin-content">
-    <h1>Panel administrativo</h1>
-    <p class="admin-muted">
-      Selecciona una opción del menú.
-    </p>
-  </main>
-</body>
+    <script>
+      document.getElementById("btnLogout")?.addEventListener("click", () => {
+        sessionStorage.removeItem("admin_auth");
+        window.location.href = "/frontend/";
+      });
+    </script>
+  </body>
 </html>
