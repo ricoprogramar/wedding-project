@@ -117,7 +117,7 @@ body.menu-open {
 /* ========================= */
 @media (max-width: 767px) {
   .navbar__toggle {
-    position: fixed;   /* 🔑 lo desacopla del navbar */
+    position: fixed;   /* lo desacopla del navbar */
     bottom: 10px;
     right: 20px;
 
@@ -138,4 +138,45 @@ body.menu-open {
 
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
   }
+}
+
+/* =========================
+   Nav link activo
+========================= */
+
+.navbar__link {
+  position: relative;
+}
+
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+
+  height: 2px; /* barrita delgada */
+  background: var(--color-primary);
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+/* Estado activo */
+.navbar__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Opcional: reforzar color del link activo */
+.navbar__link.is-active {
+  color: var(--color-text);
+}
+
+.navbar__link {
+  position: relative; /* necesario para el ::after */
+}
+
+.navbar__link::after {
+  content: "";
 }

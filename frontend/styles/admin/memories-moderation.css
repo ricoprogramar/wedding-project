@@ -86,21 +86,17 @@ body.view-admin {
 }
 
 /* =========================
-   Estado oculto (FIX REAL)
+   Estado oculto
 ========================= */
-
-/* 🔑 NO usar opacity en toda la card */
 .memory-card.is-hidden {
   opacity: 1;
 }
 
-/* ✅ Solo el contenido visual se apaga */
 .memory-card.is-hidden img,
 .memory-card.is-hidden video {
   opacity: 0.35;
 }
 
-/* Badge "Oculto" */
 .memory-card.is-hidden::after {
   content: "Oculto";
   position: absolute;
@@ -108,7 +104,7 @@ body.view-admin {
   right: 0.5rem;
   font-size: 0.7rem;
   padding: 0.15rem 0.5rem;
-  background: rgba(0, 0, 0, 1);
+  background: #000;
   color: #fff;
   border-radius: 999px;
   z-index: 3;
@@ -124,18 +120,13 @@ body.view-admin {
   align-items: flex-end;
   justify-content: center;
   padding: 0.75rem;
-
-  /* Overlay SOLO visual */
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.6),
     rgba(0, 0, 0, 0)
   );
-
   opacity: 0;
   transition: opacity 0.15s ease;
-
-  /* 🔑 FIX: el overlay no debe afectar al botón */
   pointer-events: none;
 }
 
@@ -143,25 +134,18 @@ body.view-admin {
   opacity: 1;
 }
 
-/* =========================
-   Botón de acción (FIX CLAVE)
-========================= */
 .memory-actions button {
-  pointer-events: auto;     /* 🔑 vuelve interactivo */
+  pointer-events: auto;
   position: relative;
   z-index: 2;
-
   font-size: 0.75rem;
   padding: 0.4rem 0.75rem;
-
-  /* ✅ MISMO look que card activa */
   color: var(--color-primary);
   border-color: var(--color-primary);
   background: transparent;
   font-weight: 600;
 }
 
-/* Hover consistente y vivo */
 .memory-actions button:hover {
   background: var(--color-primary);
   color: #fff;
@@ -170,7 +154,84 @@ body.view-admin {
 }
 
 /* =========================
-   Paginación (sin cambios)
+   Acciones globales
+========================= */
+.moderation-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* =========================
+   Checkbox de selección
+========================= */
+.memory-select {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 4;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+  border-radius: 4px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.memory-select:hover {
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.08);
+}
+
+/* Hover */
+.memory-card:hover .memory-select {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Seleccionada */
+.memory-card.is-selected .memory-select {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modo selección global (desde JS) */
+#list.is-selection-mode .memory-select {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Card seleccionada */
+.memory-card.is-selected {
+  outline: 2px solid var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+/* =========================
+   Mobile
+========================= */
+@media (max-width: 767px) {
+  .memory-select {
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .memory-actions {
+    opacity: 1;
+    background: none;
+  }
+
+  .memory-actions button {
+    background: var(--color-primary);
+    color: #fff;
+  }
+}
+
+/* =========================
+   Paginación
 ========================= */
 .pagination {
   margin-top: 2rem;
@@ -233,42 +294,6 @@ body.view-admin {
   color: var(--color-text);
   border-radius: 4px;
   padding: 0.2rem;
-}
-
-/* =========================
-   Mobile: acciones siempre visibles
-========================= */
-@media (max-width: 767px) {
-  .memory-actions {
-    opacity: 1 !important;
-    background: none; /* sin overlay oscuro */
-  }
-
-  .memory-actions button {
-    background: var(--color-primary);
-    color: #fff;
-    border-color: var(--color-primary);
-  }
-}
-
-/* ===== Acciones globales ===== */
-.moderation-actions {
-  display: flex;
-  gap: 0.75rem;
-}
-
-/* ===== Checkbox ===== */
-.memory-select {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  z-index: 4;
-}
-
-/* ===== Card seleccionada ===== */
-.memory-card.is-selected {
-  outline: 2px solid var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
 /* ===== Botón peligro ===== */
