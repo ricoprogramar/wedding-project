@@ -8,7 +8,8 @@
 
     <link
       rel="stylesheet"
-      href="/frontend/styles/admin/memories-moderation.css"/>
+      href="/frontend/styles/admin/memories-moderation.css"
+    />
     <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -21,14 +22,81 @@
         <i data-lucide="arrow-left"></i>
       </button>
       <h1 class="admin-header__title">Recuerdos</h1>
+
+      <!-- Actions -->
+      <div class="moderation-actions">
+        <button id="downloadSelected" class="btn-icon" disabled>
+          <i data-lucide="download"></i>
+        </button>
+
+        <button id="deleteSelected" class="btn-icon btn-icon--danger" disabled>
+          <i data-lucide="trash-2"></i>
+        </button>
+      </div>
     </header>
 
     <main class="admin-main">
       <section class="section-create">
         <h2>Moderación de recuerdos</h2>
         <div id="list"></div>
+
+        <!-- =========================
+                  Paginación
+          ========================= -->
+        <div class="pagination">
+          <!-- Info + filas por página -->
+          <div class="pagination__info">
+            <span class="pagination__count">
+              Mostrando <strong>1–36</strong> de <strong>128</strong> recuerdos
+            </span>
+
+            <label class="pagination__rows">
+              Archivos:
+              <select id="itemsPerPage">
+                <option value="6">6</option>
+                <option value="12" selected>12</option>
+                <option value="24">24</option>
+                <option value="48">48</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Navegación -->
+          <div class="pagination__controls">
+            <button class="btn btn--ghost" data-page="first">Inicio</button>
+            <button class="btn btn--ghost" data-page="prev">Anterior</button>
+
+            <span class="pagination__page">
+              Página
+              <input type="number" id="currentPage" value="1" min="1" />
+              de <strong>6</strong>
+            </span>
+
+            <button class="btn btn--ghost" data-page="next">Siguiente</button>
+            <button class="btn btn--ghost" data-page="last">Final</button>
+          </div>
+        </div>
       </section>
     </main>
+
+    <!-- Modal confirmación eliminar -->
+    <div id="delete-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+
+      <div class="modal-card">
+        <h3 class="modal-title">¿Estás seguro que quieres eliminar?</h3>
+
+        <p class="modal-text" id="deleteModalText">
+          
+        </p>
+
+        <div class="modal-actions">
+          <button id="cancelDelete" class="btn btn--ghost">Cancelar</button>
+
+          <button id="confirmDelete" class="btn btn--danger">Eliminar</button>
+        </div>
+      </div>
+    </div>
 
     <script
       type="module"

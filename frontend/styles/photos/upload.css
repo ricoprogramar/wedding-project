@@ -81,6 +81,7 @@ body {
 .modal-card {
   position: relative;
   max-width: 420px;
+  max-height: 300px; /* ✅ agrega esto */
   margin: 15vh auto;
   background: var(--color-surface);
   color: var(--color-text);
@@ -99,3 +100,4 @@ body {
   color: var(--color-text-muted);
   margin: 1rem 0 1.5rem;
 }
+

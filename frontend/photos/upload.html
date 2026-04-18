@@ -1,4 +1,6 @@
 <!doctype html>
+<html lang="es">
+<head>
   <meta charset="UTF-8" />
   <title>Sube tus fotos y videos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -6,24 +8,16 @@
   <link rel="stylesheet" href="/frontend/styles/variables.css">
   <link rel="stylesheet" href="/frontend/styles/photos/photos.css">
   <link rel="stylesheet" href="/frontend/styles/photos/upload.css">
-  <link rel="stylesheet" href="../styles/components/buttons.css" />
-
+  <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 </head>
 
 <body>
   <section class="photos">
-      <button class="btn-back" id="back-home">← Volver</button>
+    <button type="button" class="btn-back" id="back-home">← Volver</button>
 
     <div class="photos__container">
-
       <span class="photos__tag">Recuerdos</span>
       <h1 class="photos__title">Sube tus fotos y videos</h1>
-
-      <div class="photos__divider">
-        <span class="photos__line"></span>
-        <span class="photos__icon">❤</span>
-        <span class="photos__line"></span>
-      </div>
 
       <p class="photos__subtitle">
         Comparte los momentos que captures durante nuestra boda.<br>
@@ -34,61 +28,53 @@
 
       <div class="photos__content">
         <div class="photos-card photos-upload-card">
-
           <h3 class="photos-card__title">Selecciona tus recuerdos</h3>
 
           <p class="photos-card__description">
             Fotos y videos tomados durante el evento.
           </p>
 
-          <!-- Input real oculto -->
-          <input
-            type="file"
-            id="files"
-            multiple
-            accept="image/*,video/*"
-            hidden
-          />
+          <input type="file" id="files" multiple accept="image/*,video/*" hidden />
 
-          <!-- Botón visual -->
-          <button class="photos-upload__select" id="btnSelectFiles">
+          <button type="button" class="photos-upload__select" id="btnSelectFiles">
             Seleccionar archivos
           </button>
 
-          <!-- Preview -->
           <div id="preview" class="photos-preview"></div>
 
           <div class="photos-card__actions">
-            
-            <button class="btn btn--primary" id="btnUpload">
-            Subir archivos
+            <button type="button" class="btn btn--primary" id="btnUpload">
+              Subir archivos
             </button>
-
           </div>
-
         </div>
       </div>
-
     </div>
   </section>
 
-    <!-- Modal de estado de subida -->
   <div id="upload-modal" class="modal hidden">
     <div class="modal-backdrop"></div>
-
     <div class="modal-card">
       <h3 id="modal-title">Subidas no disponibles</h3>
       <p id="modal-message"></p>
-
-      <button id="modal-close" class="btn btn--ghost">
-        Entendido
-      </button>
+      <button id="modal-close" class="btn btn--ghost">Entendido</button>
     </div>
   </div>
 
+  <!-- Agregar clase toast
+  <div id="upload-toast" class="toast">
+    <span id="toast-message"></span>
+  </div> -->
+
+  <div id="upload-modal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-card">
+    <h3 id="modal-title">Aviso</h3>
+    <p id="modal-message"></p>
+    <button id="modal-close" class="btn btn--ghost">Entendido</button>
+  </div>
+</div>
 
   <script type="module" src="/frontend/js/photos/upload.js"></script>
 </body>
 </html>
-<html lang="es">
-<head>

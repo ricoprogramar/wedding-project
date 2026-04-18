@@ -13,6 +13,8 @@ import { initHeroCarousel } from "./modules/carousel.js";
 import { initNavbar } from "./modules/navbar.js";
 import "./modules/attendance.js";
 
+import { initPhotosQR } from "./photos/photos-qr.js"; 
+
 // ✅ Token global: se ejecuta una sola vez
 persistToken();
 attachTokenToInternalLinks();
@@ -26,4 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initDresscodeNavigation();
   initTipsNavigation();
   initCountdown();
+
+  initPhotosQR();
 });

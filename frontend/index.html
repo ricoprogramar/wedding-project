@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="./styles/components/footer.css" />
     <link rel="stylesheet" href="./styles/components/modal.css" />
     <link rel="stylesheet" href="./styles/photos/photos.css" />
+
   </head>
 
   <body>
@@ -37,7 +38,11 @@
           <a href="#tips" class="navbar__link">Tips</a>
           <a href="#vestimenta" class="navbar__link">Vestimenta</a>
           <a href="#regalos" class="navbar__link">Regalos</a>
-          <a href="#photos" class="navbar__link">Fotos</a>         
+          <a href="#photos" class="navbar__link">Fotos</a>             
+          <a href="/frontend/photos/gallery.html" class="navbar__link">
+            Galería
+          </a>
+        
         </nav>
 
         <button class="btn btn--primary navbar__cta btn-confirm">
@@ -125,16 +130,10 @@
     <section class="event" id="evento">
       <div class="event__container">
         <div class="event__header">
-          <span class="event__tag">Ceremonia & Recepción</span>
+          <span class="event__tag">Ceremonia & Recepción - 16 de mayo de 2026</span>
           <h2 class="event__title">Nuestra boda</h2>
 
-          <div class="event__divider">
-            <span class="event__line"></span>
-            <span class="event__icon">❤</span>
-            <span class="event__line"></span>
-          </div>
-
-          <p class="event__date">16 de mayo de 2026</p>
+          <p class="event__date"></p>
         </div>
 
         <div class="event__content">
@@ -380,14 +379,7 @@
     <section class="photos" id="photos">
       <div class="photos__container">
 
-        <span class="photos__tag">Recuerdos</span>
-        <h2 class="photos__title">Fotos y videos del evento</h2>
-
-        <div class="photos__divider">
-          <span class="photos__line"></span>
-          <span class="photos__icon">❤</span>
-          <span class="photos__line"></span>
-        </div>
+        <h2 class="photos__title">Fotos y videos del evento</h2>    
 
         <p class="photos__subtitle">
           Comparte los momentos que captures durante nuestra boda
@@ -403,12 +395,8 @@
               tus fotos y videos del evento.
             </p>
 
-            <div class="photos-card__qr">
-              <img
-                src="./assets/images/qr-fotos.png"
-                alt="QR fotos del evento"
-              />
-            </div>
+            <!-- QR -->
+            <div class="photos-card__qr" id="qr-container"></div>
 
             <div class="photos-card__actions">
               <a href="/frontend/photos/upload.html" class="btn btn--primary">

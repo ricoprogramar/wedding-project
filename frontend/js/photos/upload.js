@@ -2,6 +2,7 @@ import { API_BASE } from "../config.js";
 
 const modal = document.getElementById("upload-modal");
 const modalMessage = document.getElementById("modal-message");
+const modalTitle = document.getElementById("modal-title");
 const modalClose = document.getElementById("modal-close");
 
 const statusMsg = document.getElementById("upload-status");
@@ -13,37 +14,39 @@ const preview = document.getElementById("preview");
 const backBtn = document.getElementById("back-home");
 
 const MAX_FILES = 10;
+const MAX_PHOTO_MB = 10;
+const MAX_VIDEO_MB = 100;
+
+let modalTimer = null;
 
 /* =====================
-   Habilitar / Deshabilitar
+   MODAL
 ===================== */
-function disableUpload(message) {
-  btnUpload.disabled = true;
-  btnSelect.disabled = true;
-  btnUpload.classList.add("btn-disabled");
-  btnSelect.classList.add("btn-disabled");
-  statusMsg.textContent = message;
-}
-
-function enableUpload() {
-  btnUpload.disabled = false;
-  btnSelect.disabled = false;
-  btnUpload.classList.remove("btn-disabled");
-  btnSelect.classList.remove("btn-disabled");
-  statusMsg.textContent = "";
-}
-
-/* =====================
-   Modal
-===================== */
-function showModal(message) {
+function showModal(message, autoCloseMs = 6000, title = "Aviso") {
+  modalTitle.textContent = title;
   modalMessage.textContent = message;
+
   modal.classList.remove("hidden");
+  modal.style.display = "flex";
+  modal.style.opacity = "1";
+  modal.style.visibility = "visible";
+
+  if (modalTimer) clearTimeout(modalTimer);
+
+  modalTimer = setTimeout(() => {
+    closeModal();
+  }, autoCloseMs);
 }
 
-modalClose?.addEventListener("click", () => {
+function closeModal() {
+  if (modalTimer) clearTimeout(modalTimer);
   modal.classList.add("hidden");
-});
+  modal.style.display = "";
+  modal.style.opacity = "";
+  modal.style.visibility = "";
+}
+
+modalClose?.addEventListener("click", closeModal);
 
 /* =====================
    Token
@@ -77,29 +80,64 @@ function renderPreview(files) {
   });
 }
 
+/* =====================
+   Validación
+===================== */
+function validateFiles(files) {
+  for (const file of files) {
+    const sizeMB = file.size / (1024 * 1024);
+
+    if (file.type.startsWith("image/") && sizeMB > MAX_PHOTO_MB) {
+      showModal(
+        `La foto "${file.name}" pesa ${sizeMB.toFixed(1)}MB. Máximo ${MAX_PHOTO_MB}MB.`,
+        8000,
+        "Archivo muy grande",
+      );
+      return false;
+    }
+
+    if (file.type.startsWith("video/") && sizeMB > MAX_VIDEO_MB) {
+      showModal(
+        `El video "${file.name}" pesa ${sizeMB.toFixed(1)}MB. Máximo ${MAX_VIDEO_MB}MB. Reduce la duración o calidad.`,
+        10000,
+        "Archivo muy grande",
+      );
+      return false;
+    }
+  }
+  return true;
+}
+
 input?.addEventListener("change", () => {
   const filesArr = Array.from(input.files);
-  if (filesArr.length > MAX_FILES) {
-    alert(`Máximo ${MAX_FILES} archivos. Se usarán los primeros.`);
-  }
   const kept = filesArr.slice(0, MAX_FILES);
+
+  if (!validateFiles(kept)) {
+    input.value = "";
+    preview.innerHTML = "";
+    return;
+  }
+
   const dt = new DataTransfer();
   kept.forEach((f) => dt.items.add(f));
   input.files = dt.files;
+
   renderPreview(input.files);
 });
 
 /* =====================
    Subir archivos
 ===================== */
-btnUpload?.addEventListener("click", async () => {
-  if (btnUpload.disabled) return;
+btnUpload?.addEventListener("click", async (e) => {
+  e.preventDefault();
 
   const files = input.files;
   if (!files || files.length === 0) {
-    showModal("Selecciona al menos un archivo.");
+    showModal("Selecciona al menos un archivo.", 6000, "Aviso");
     return;
   }
+
+  if (!validateFiles(files)) return;
 
   const form = new FormData();
   [...files].forEach((f) => form.append("files", f));
@@ -114,27 +152,27 @@ btnUpload?.addEventListener("click", async () => {
     const text = await res.text();
 
     if (!res.ok) {
-      let message = "Error al subir archivos";
+      let message = "No se pudieron subir los archivos.";
       try {
         const err = JSON.parse(text);
         message = err.error || message;
       } catch {}
-
-      if (res.status === 403) {
-        showModal(message);
-        return;
-      }
-
-      showModal(message);
+      showModal(message, 8000, "Error");
       return;
     }
 
     const data = JSON.parse(text);
-    showModal(`✅ ${data.count} archivos subidos correctamente`);
+
+    showModal(
+      `${data.count} archivo(s) subidos correctamente. ¡Ya puedes verlos en la galería!`,
+      3000,
+      "¡Listo!",
+    );
+
     input.value = "";
     preview.innerHTML = "";
   } catch {
-    showModal("No se pudo subir los archivos. Intenta nuevamente.");
+    showModal("Error de conexión. Intenta nuevamente.", 8000, "Error");
   }
 });
 
@@ -144,38 +182,3 @@ btnUpload?.addEventListener("click", async () => {
 backBtn?.addEventListener("click", () => {
   window.location.href = "/frontend/index.html#photos";
 });
-
-/* =====================
-   Verificar disponibilidad
-===================== */
-(async function checkUploadAvailability() {
-  try {
-    const res = await fetch(`${API_BASE}/api/memories/config`);
-    const cfg = await res.json();
-
-    const now = new Date();
-    const startAt = cfg.start_at ? new Date(cfg.start_at) : null;
-    const endAt = cfg.end_at ? new Date(cfg.end_at) : null;
-
-    if (!cfg.enabled) {
-      disableUpload("Las subidas de recuerdos están desactivadas.");
-      return;
-    }
-
-    if (startAt && now < startAt) {
-      disableUpload(
-        `Podrás subir archivos a partir del ${startAt.toLocaleString()}`,
-      );
-      return;
-    }
-
-    if (endAt && now > endAt) {
-      disableUpload("El período para subir recuerdos ya finalizó.");
-      return;
-    }
-
-    enableUpload();
-  } catch {
-    disableUpload("No se pudo verificar el estado de las subidas.");
-  }
-})();

@@ -1,5 +1,4 @@
 @import "../variables.css";
-@import "../components/event.css"; /* reutilizamos look & feel */
 
 /* =========================
    PHOTOS – sección recuerdos
@@ -16,7 +15,7 @@
   margin: auto;
 }
 
-/* Tipografía reutilizando escala visual */
+/* Tipografía */
 .photos__tag {
   color: var(--color-primary);
   text-transform: uppercase;
@@ -27,23 +26,6 @@
 .photos__title {
   font-size: 2.5rem;
   margin: 1rem 0;
-}
-
-.photos__divider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-.photos__line {
-  width: 60px;
-  height: 1px;
-  background: var(--color-primary);
-}
-
-.photos__icon {
-  color: var(--color-primary);
 }
 
 .photos__subtitle {
@@ -58,7 +40,6 @@
 .photos__content {
   margin-top: 3rem;
   display: grid;
-  grid-template-columns: 1fr;
   justify-items: center;
 }
 
@@ -72,6 +53,9 @@
   border-radius: var(--radius);
   max-width: 420px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
@@ -86,25 +70,40 @@
   margin-top: 0.75rem;
 }
 
+/* QR */
+
 .photos-card__qr {
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 1rem;
   display: flex;
   justify-content: center;
 }
 
-.photos-card__qr img {
-  width: 160px;
+.photos-card__qr img,
+.photos-card__qr canvas {
+  width: 180px;
+  height: 180px;
   background: #fff;
   padding: 0.5rem;
   border-radius: var(--radius);
 }
 
-.photos-card__actions a {
+/* Acciones */
+
+.photos-card__actions {
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.8rem; /* separación clara del QR */
+}
+
+.photos-card__actions a {
+  text-decoration: none;
+  width: 100%;
+  display: block;
 }
 
 /* =========================
-   Mobile
+   Responsive
 ========================= */
 
 @media (max-width: 767px) {
@@ -116,13 +115,14 @@
     font-size: 1.2rem;
   }
 
-  .photos-card__qr img {
+  .photos-card__qr img,
+  .photos-card__qr canvas {
     width: 140px;
+    height: 140px;
   }
-}
 
-
-/* Quitar subrayado del botón Fotos */
-.photos-card__actions a {
-  text-decoration: none;
+  /* En mobile centramos el botón */
+  .photos-card__actions {
+    justify-content: center;
+  }
 }

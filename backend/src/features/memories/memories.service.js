@@ -37,3 +37,36 @@ export async function listVisibleMemories() {
   `);
   return rows;
 }
+
+/* =========================
+   Admin – contar recuerdos
+========================= */
+export async function countAdminMemories() {
+  const { rows } = await pool.query(`
+    SELECT COUNT(*)::int AS total
+    FROM memories
+  `);
+  return rows[0].total;
+}
+
+/* =========================
+   Admin – paginados
+========================= */
+export async function getAdminMemoriesPaginated({ limit, offset }) {
+  const { rows } = await pool.query(
+    `
+    SELECT
+      id,
+      file_path,
+      file_name,
+      is_visible,
+      created_at
+    FROM memories
+    ORDER BY created_at DESC
+    LIMIT $1 OFFSET $2
+    `,
+    [limit, offset]
+  );
+
+  return rows;
+}

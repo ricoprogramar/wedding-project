@@ -9,7 +9,10 @@ import {
   updateMemoriesConfig,
   getAdminMemories,
   updateMemoryVisibility,
+  deleteMemoriesBatch,
 } from "./memories.controller.js";
+
+import { downloadMemories } from "./memories.download.js";
 
 const router = express.Router();
 
@@ -66,5 +69,8 @@ router.put("/config", updateMemoriesConfig);
 
 router.get("/admin/list", getAdminMemories);
 router.put("/admin/:id/visibility", updateMemoryVisibility);
+
+router.get("/admin/download", downloadMemories);
+router.delete("/admin/batch", deleteMemoriesBatch);
 
 export default router;
