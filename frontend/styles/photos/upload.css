@@ -39,7 +39,7 @@ body {
 /* Preview */
 .photos-preview {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  grid-template-columns: repeat(5, 1fr); /* ✅ máx. 5 por fila */
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
@@ -51,6 +51,12 @@ body {
   object-fit: cover;
   border-radius: var(--radius);
   background: #000;
+}
+
+@media (max-width: 480px) {
+  .photos-preview {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* Botón volver – posición superior izquierda */

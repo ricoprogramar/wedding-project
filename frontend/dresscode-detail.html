@@ -10,14 +10,19 @@
     <link rel="stylesheet" href="./styles/components/dresscode-detail.css" />
     <link rel="stylesheet" href="./styles/components/buttons.css" />
     <link rel="stylesheet" href="./styles/components/footer.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/frontend/js/ui/icons.js"></script>
   </head>
 
   <body>
+    <button class="btn-icon btn-icon--primary back-btn" data-back>
+      <i data-lucide="arrow-left"></i>
+    </button>
+
     <main class="dresscode-detail">
       <div class="dresscode-detail__container">
-        <button class="btn-back" id="back-home">← Volver</button>
-
-        <h1>Código de vestimenta</h1>
+        <h1 class="dresscode-detail__title">Código de vestimenta</h1>
 
         <p class="dresscode-detail__intro">
           La vestimenta para ambos eventos es formal. A continuación, te
@@ -26,17 +31,21 @@
 
         <section>
           <h2>Para caballeros</h2>
-          <p>Ropa elegante y formal, sin necesidad de corbata.</p>
+          <ul>
+            <li>Ropa elegante y formal, sin necesidad de corbata.</li>
+          </ul>
         </section>
 
         <section>
           <h2>Para damas</h2>
-          <p>Elegantes y formales.</p>
-          <p>
-            Las damas de honor vestirán de color verde, por lo que se solicita
-            evitar este color.
-          </p>
-          <p>Evitar a toda costa el color blanco.</p>
+          <ul>
+            <li>Elegantes y formales.</li>
+            <li>
+              Las damas de honor vestirán de color verde, por lo que se solicita
+              evitar este color.
+            </li>
+            <li>Evitar a toda costa el color blanco.</li>
+          </ul>
         </section>
 
         <section>

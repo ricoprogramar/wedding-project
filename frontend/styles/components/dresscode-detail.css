@@ -7,8 +7,20 @@
   margin: auto;
 }
 
-.dresscode-detail h1 {
+.dresscode-detail__title {
   margin-bottom: 1.5rem;
+}
+
+@media (width < 768px) {
+  .dresscode-detail__title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 50px auto 24px auto;
+  }
+
+  .dresscode-detail {
+    margin: auto 24px;
+  }
 }
 
 .dresscode-detail h2 {
