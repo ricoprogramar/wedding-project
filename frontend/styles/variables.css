@@ -17,4 +17,9 @@
   
   --font-weight-regular: 400;
   --font-weight-bold: 700;
+
+  
+ --hero-video-scale-desktop: 60%;
+ --hero-video-scale-mobile: 70%;
+
 }

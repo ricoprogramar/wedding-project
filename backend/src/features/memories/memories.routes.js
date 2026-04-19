@@ -54,7 +54,8 @@ const upload = multer({
 router.post("/upload", upload.array("files", 10), uploadMemories);
 
 // Galería pública
-router.get("/list", getMemories);
+// router.get("/list", getMemories);
+router.get("/list", getMemoriesPaginated);
 
 /* ===============================
    Configuración (ADMIN)
@@ -72,5 +73,6 @@ router.put("/admin/:id/visibility", updateMemoryVisibility);
 
 router.get("/admin/download", downloadMemories);
 router.delete("/admin/batch", deleteMemoriesBatch);
+
 
 export default router;

@@ -188,4 +188,30 @@ export async function deleteMemoriesBatch(req, res) {
   }
 }
 
+// Paginado
+export async function getMemoriesPaginated(req, res) {
+  const page = Math.max(parseInt(req.query.page) || 1, 1);
+  const pageSize = Math.max(parseInt(req.query.pageSize) || 12, 1);
+
+  const { rows } = await pool.query(
+    `
+    SELECT id, file_path
+    FROM memories
+    WHERE is_visible = true
+    ORDER BY created_at DESC
+    LIMIT $1 OFFSET $2
+    `,
+    [pageSize, (page - 1) * pageSize],
+  );
+
+  const { rows: count } = await pool.query(
+    "SELECT COUNT(*) FROM memories WHERE is_visible = true",
+  );
+
+  return res.json({
+    data: rows,
+    total: Number(count[0].count),
+  });
+}
+
 

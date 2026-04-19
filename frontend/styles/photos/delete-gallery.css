@@ -1,0 +1,78 @@
+@import "../variables.css";
+
+/* Fondo y tipografía global */
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-regular);
+}
+
+.photos {
+  padding: 1rem;
+  border: none;
+}
+
+/* Título principal */
+.photos__title {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+/* Tag superior */
+.photos__tag {
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+}
+
+/* ❌ Quitar línea decorativa */
+.photos__divider {
+  display: none;
+}
+
+/* Grid profesional */
+.photos-gallery {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .photos-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .photos-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .photos-gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Items */
+.photos-gallery img,
+.photos-gallery video {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--color-surface-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photos-gallery img:hover,
+.photos-gallery video:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+

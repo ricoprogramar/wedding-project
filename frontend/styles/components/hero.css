@@ -1,5 +1,5 @@
 .hero {
-  padding: 4rem 1rem;
+  padding: 4rem 1rem 2rem 1rem;
 }
 
 .hero__container {
@@ -40,25 +40,23 @@
   gap: 1rem;
 }
 
-/* Transición suave */
+/* =========================
+   Contenedor imagen / video
+========================= */
 .hero__image {
   position: relative;
   width: 100%;
   max-width: 600px;
-
-    /* 🔑 Clave: altura consistente */
-  aspect-ratio: 7/ 5;
-
+  aspect-ratio: 7 / 5; /* ✅ desktop horizontal */
   overflow: hidden;
   border-radius: 20px;
 }
 
+/* Imagen */
 .hero__image img {
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
   object-fit: contain;
-
   opacity: 1;
   transition: opacity 0.6s ease-in-out;
 }
@@ -67,22 +65,43 @@
   opacity: 0;
 }
 
-/* ========================= */
-/* Mobile (override) */
-/* ========================= */
+/* Video (desktop) */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* ✅ desktop sin recorte */
+  background-color: #000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 767px) {
+
+  .hero {
+  padding: 1.25rem 1rem;
+  }
   .hero__container {
-    grid-template-columns: 1fr; /* 🔑 rompe las 2 columnas */
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  /* Imagen arriba */
   .hero__image {
     order: -1;
     max-width: 100%;
+    aspect-ratio: 9 / 16;   /* 🔑 CLAVE: contenedor vertical */
   }
 
-  /* Ajuste tipográfico */
+  .hero__video {
+    object-fit: cover;     /* 🔑 llena el vertical (recorte natural) */
+    width: 100%;
+    height: 100%;
+  }
+
   .hero__title {
     font-size: 2rem;
   }
@@ -95,13 +114,25 @@
     font-size: 1rem;
   }
 
-  /* Botones en columna */
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
   }
 
   .hero__actions .btn {
     width: 100%;
   }
+
+  .hero__actions .btn--outline {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    padding: 0.85rem 1.5rem;
+  }
+}
+
+/* Desktop / Tablet button fix */
+.hero__actions .btn--outline {
+  padding: 0.75rem 1.5rem;
 }

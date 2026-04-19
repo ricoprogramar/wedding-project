@@ -1,4 +1,3 @@
-
 // frontend/js/main.js
 // INIT: estado global del token al arrancar la app
 import { persistToken, attachTokenToInternalLinks } from "./modules/token.js";
@@ -12,8 +11,9 @@ import { initCenteredScroll } from "./modules/scroll.js";
 import { initHeroCarousel } from "./modules/carousel.js";
 import { initNavbar } from "./modules/navbar.js";
 import "./modules/attendance.js";
+import { initAudioManager } from "./modules/audio-manager.js";
 
-import { initPhotosQR } from "./photos/photos-qr.js"; 
+import { initPhotosQR } from "./photos/photos-qr.js";
 
 // ✅ Token global: se ejecuta una sola vez
 persistToken();
@@ -30,4 +30,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initCountdown();
 
   initPhotosQR();
+  initAudioManager();
 });

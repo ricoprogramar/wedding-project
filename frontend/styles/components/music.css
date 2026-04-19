@@ -1,0 +1,73 @@
+/* /frontend/css/components/music-control.css */
+/* FIX: se corrige bloque .music-control y propiedades inválidas */
+
+.music-control {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 999px;
+  z-index: 1500;
+
+  /* display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(10px); */
+}
+
+.music-control__btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-control__btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* /frontend/css/components/music-control.css */
+/* FIX: selector limpio + estándar moderno vertical */
+
+#music-volume {
+    /* Slider horizontal */
+  /* width: 80px;
+  accent-color: var(--color-primary); */
+
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 8px;
+  height: 70px;
+  accent-color: var(--color-primary);
+}
+
+/* Mobile
+@media (max-width: 767px) {
+  #music-volume {
+    width: 60px;
+  }
+} */
+
+/* =========================
+   Music control – layout móvil vertical
+========================= */
+@media (max-width: 767px) {
+  .music-control {
+    display: flex;
+    flex-direction: column; /* ✅ icono arriba, slider abajo */
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #music-volume {
+    width: 8px;      /* ✅ ancho real del slider vertical */
+    height: 70px;    /* ✅ alto cómodo para touch */
+  }
+}

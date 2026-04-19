@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="./styles/components/footer.css" />
     <link rel="stylesheet" href="./styles/components/modal.css" />
     <link rel="stylesheet" href="./styles/photos/photos.css" />
+    <link rel="stylesheet" href="./styles/components/music.css" />
 
   </head>
 
@@ -81,8 +82,19 @@
           
         </div>
 
+        <!-- <div class="hero__image">
+          <img id="heroCarouselImage" alt="Pareja" />
+        </div> -->
+
+        <!-- Carrusel -->         
         <div class="hero__image">
           <img id="heroCarouselImage" alt="Pareja" />
+          <video
+            class="hero__video"
+            muted
+            playsinline
+            preload="none"
+          ></video>
         </div>
       </div>
     </main>
@@ -409,6 +421,37 @@
       </div>
     </section>
 
+    <!-- /frontend/index.html -->
+    <!-- FIX: estructura limpia, un solo audio, botón y control separados correctamente -->
+
+    <audio
+      id="bg-music"
+      src="/frontend/assets/audio/wedding-music.mp3"
+      preload="none"
+      loop
+    ></audio>
+
+    <!-- Control flotante de música -->
+    <div id="music-control" class="music-control" aria-label="Control de música">
+      <button
+        id="music-toggle"
+        class="music-control__btn"
+        aria-label="Reproducir / Pausar música"
+      >
+        <i data-lucide="volume-x"></i>
+      </button>
+
+      <input
+        type="range"
+        id="music-volume"
+        min="0"
+        max="1"
+        step="0.05"
+        aria-label="Volumen"
+      />
+    </div>
+
+
     <footer class="footer">
       <div class="footer__container">
         <p class="footer__text">
@@ -419,6 +462,8 @@
       </div>
     </footer>
 
+
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

@@ -1,78 +1,241 @@
 @import "../variables.css";
 
-/* Fondo y tipografía global */
-body {
+/* =========================
+   Layout base público
+========================= */
+body.view-public {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-family-base);
-  font-weight: var(--font-weight-regular);
 }
 
-.photos {
-  padding: 1rem;
-  border: none;
-}
-
-/* Título principal */
-.photos__title {
-  font-family: var(--font-family-base);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text);
-}
-
-/* Tag superior */
-.photos__tag {
-  font-family: var(--font-family-base);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
-  letter-spacing: 0.08em;
-}
-
-/* ❌ Quitar línea decorativa */
-.photos__divider {
-  display: none;
-}
-
-/* Grid profesional */
-.photos-gallery {
-  margin-top: 2.5rem;
-  display: grid;
-  grid-template-columns: 1fr;
+/* =========================
+   Header (clon visual admin)
+========================= */
+.admin-header {
+  display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
-@media (min-width: 768px) {
-  .photos-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.admin-header__title {
+  margin: 0 auto;
 }
 
-@media (min-width: 1024px) {
-  .photos-gallery {
-    grid-template-columns: repeat(3, 1fr);
-  }
+/* =========================
+   Contenido
+========================= */
+.admin-main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* =========================
+   Panel oscuro
+========================= */
+.section-create {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.section-create h2 {
+  margin: 0 0 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+/* =========================
+   Grid recuerdos (6 / 4 / 2)
+========================= */
+#list {
+  display: grid;
+  gap: 1rem;
 }
 
 @media (min-width: 1280px) {
-  .photos-gallery {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  #list { grid-template-columns: repeat(6, 1fr); }
 }
 
-/* Items */
-.photos-gallery img,
-.photos-gallery video {
+@media (min-width: 768px) and (max-width: 1279px) {
+  #list { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 767px) {
+  #list { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =========================
+   Card recuerdo
+========================= */
+.memory-card {
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  cursor: zoom-in;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+}
+
+.memory-card img,
+.memory-card video {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: var(--radius);
+  display: block;
+}
+
+/* =========================
+   Modal overlay profesional
+========================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;     /* ✅ CENTRADO VERTICAL */
+  justify-content: center; /* ✅ CENTRADO HORIZONTAL */
+}
+
+/* Modal cerrado */
+.modal.hidden {
+  display: none;
+  pointer-events: none;
+}
+
+/* Fondo */
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* Card del viewer */
+.modal-card--viewer {
+  position: relative;
+  z-index: 1;
+
+  max-width: 90vw;
+  max-height: 90vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagen / video */
+.modal-card--viewer img,
+.modal-card--viewer video {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+/* =========================
+   Paginación (CLON MODERACIÓN)
+========================= */
+.pagination {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Fila superior */
+.pagination__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pagination__count {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Selector archivos */
+.pagination__rows {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.pagination__rows select {
   background: var(--color-surface-soft);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
 }
 
-.photos-gallery img:hover,
-.photos-gallery video:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+/* Controles */
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
+/* Grupo página */
+.pagination__page {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Input página */
+.pagination__page input {
+  width: 3rem;
+  text-align: center;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: 6px;
+  padding: 0.25rem;
+}
+
+/* Botones ghost */
+.pagination__controls .btn--ghost {
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+}
+
+/* Botón cerrar modal */
+.viewer-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-close:hover {
+  background: rgba(0,0,0,0.85);
+}

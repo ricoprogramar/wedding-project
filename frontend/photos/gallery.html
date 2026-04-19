@@ -1,5 +1,3 @@
-<!-- Galería (si está activa) -->
-
 <!doctype html>
 <html lang="es">
   <head>
@@ -7,39 +5,75 @@
     <title>Galería del evento</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/frontend/styles/photos/photos.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/frontend/styles/variables.css" />
     <link rel="stylesheet" href="/frontend/styles/photos/gallery.css" />
     <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
 
+    <!-- Lucide -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="/frontend/js/ui/icons.js"></script>
   </head>
 
-  <body class="view-public" id="galley">
+  <body class="view-public">
+    <header class="admin-header">
+      <button class="btn-icon btn-icon--primary back-btn" data-back>
+        <i data-lucide="arrow-left"></i>
+      </button>
+      <h1 class="admin-header__title">Galería</h1>
+    </header>
 
-    <button class="btn-icon btn-icon--primary back-btn" data-back>
-      <i data-lucide="arrow-left"></i>
-    </button>
+    <main class="admin-main">
+      <section class="section-create">
+        <h2>Galería del evento</h2>
 
-    <section class="photos">
-      <div class="photos__container">
-        <div>
-          <span class="photos__tag">Recuerdos</span>
-          <h1 class="photos__title">Galería del evento</h1>
+        <!-- GRID -->
+        <div id="list"></div>
+
+        <div class="pagination">
+          <div class="pagination__info">
+            <span class="pagination__count"></span>
+
+            <label class="pagination__rows">
+              Archivos:
+              <select id="itemsPerPage">
+                <option value="6">6</option>
+                <option value="12" selected>12</option>
+                <option value="24">24</option>
+                <option value="48">48</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="pagination__controls">
+            <button class="btn btn--ghost" data-page="first">Inicio</button>
+            <button class="btn btn--ghost" data-page="prev">Anterior</button>
+
+            <span class="pagination__page">
+              Página
+              <input type="number" id="currentPage" min="1" />
+              <span></span>
+            </span>
+
+            <button class="btn btn--ghost" data-page="next">Siguiente</button>
+            <button class="btn btn--ghost" data-page="last">Final</button>
+          </div>
         </div>
+      </section>
+    </main>
 
-        <div class="photos__divider">
-          <span class="photos__line"></span>
-          <span class="photos__icon">❤</span>
-          <span class="photos__line"></span>
-        </div>
+    <!-- MODAL OVERLAY REAL -->
+    <div id="viewer-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
 
-        <div class="photos__content">
-          <div id="gallery" class="photos-gallery"></div>
-        </div>
+      <div class="modal-card modal-card--viewer">
+        <button class="viewer-close" aria-label="Cerrar">✕</button>
+        <img id="viewer-img" />
+        <video id="viewer-video" controls></video>
       </div>
-    </section>
+    </div>
 
+    <!--JS CORRECTO (MODULE) -->
     <script type="module" src="/frontend/js/photos/gallery.js"></script>
   </body>
 </html>
