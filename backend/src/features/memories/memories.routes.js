@@ -4,12 +4,13 @@ import path from "path";
 
 import {
   uploadMemories,
-  getMemories,
+  // getMemories,
   getMemoriesConfig,
   updateMemoriesConfig,
   getAdminMemories,
   updateMemoryVisibility,
   deleteMemoriesBatch,
+  getMemoriesPaginated,
 } from "./memories.controller.js";
 
 import { downloadMemories } from "./memories.download.js";
