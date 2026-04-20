@@ -1,1 +1,0 @@
- // Lee estado, fechas, flags
