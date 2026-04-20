@@ -13,12 +13,15 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 const allowedOrigins = [
   "http://127.0.0.1:3000",
   "http://localhost:3000",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
+  "https://boda.ricoprogramar.com", // PRODUCCIÓN
 ];
+
 
 // ✅ CORS
 app.use(
