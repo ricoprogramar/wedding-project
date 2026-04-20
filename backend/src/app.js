@@ -45,20 +45,22 @@ app.use("/api/invitation", adminRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/memories", memoriesRoutes);
 
-// ✅ Estáticos
-app.use("/frontend", express.static(path.join(__dirname, "../frontend")));
+
+// CORRECCIÓN: subir DOS niveles
+app.use(express.static(path.join(__dirname, "../../frontend")));
+
+app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
 
 // // STATIC DEFINITIVO (sirve todo uploads)
 // app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
 
-app.use(
-  "/uploads",
-  express.static(path.resolve(process.cwd(), "uploads"), {
-    etag: false,
-    lastModified: false,
-    maxAge: 0,
-  }),
-);
-
+// app.use(
+//   "/uploads",
+//   express.static(path.resolve(process.cwd(), "uploads"), {
+//     etag: false,
+//     lastModified: false,
+//     maxAge: 0,
+//   }),
+// );
 
 export default app;

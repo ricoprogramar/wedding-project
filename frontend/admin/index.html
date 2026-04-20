@@ -5,9 +5,9 @@
     <title>Panel administrativo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/frontend/styles/variables.css" />
-    <link rel="stylesheet" href="/frontend/styles/admin/admin-shell.css" />
-    <link rel="stylesheet" href="/frontend/styles/components/buttons.css" />
+    <link rel="stylesheet" href="/styles/variables.css" />
+    <link rel="stylesheet" href="/styles/admin/admin-shell.css" />
+    <link rel="stylesheet" href="/styles/components/buttons.css" />
 
   </head>
 
@@ -18,10 +18,10 @@
       <div class="admin-logo">RicoProgramar</div>
 
       <nav class="admin-nav">
-        <a href="../admin/invitation/invitation.html">Invitaciones</a>
-        <a href="/frontend/photos/gallery.html">Galería</a>
-        <a href="../admin/memories/memories.html">Config. - Carga</a>
-        <a href="../admin/memories/memories-moderation.html">Config. Galería</a>
+        <a href="/admin/invitation/invitation.html">Invitaciones</a>
+        <a href="/photos/gallery.html">Galería</a>
+        <a href="/admin/memories/memories.html">Config. - Carga</a>
+        <a href="/admin/memories/memories-moderation.html">Config. Galería</a>
       </nav>
     </aside>
 
@@ -44,7 +44,7 @@
     <script>
       document.getElementById("btnLogout")?.addEventListener("click", () => {
         sessionStorage.removeItem("admin_auth");
-        window.location.href = "/frontend/";
+        window.location.href = "/";
       });
     </script>
   </body>

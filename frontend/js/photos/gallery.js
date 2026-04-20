@@ -129,9 +129,17 @@ function updatePage(newPage) {
 /* =========================
    Cargar datos
 ========================= */
+// async function loadGallery() {
+//   const res = await fetch(`${API_BASE}/api/memories/list`);
+//   allItems = await res.json(); // ✅ array plano del backend
+//   updatePage(1);
+// }
+
 async function loadGallery() {
   const res = await fetch(`${API_BASE}/api/memories/list`);
-  allItems = await res.json(); // ✅ array plano del backend
+  const json = await res.json();
+
+  allItems = json.data; // ← FIX clave
   updatePage(1);
 }
 
@@ -152,8 +160,6 @@ itemsSelect.onchange = () => {
   pageSize = parseInt(itemsSelect.value, 10);
   updatePage(1);
 };
-
-
 
 /* =========================
    Init
