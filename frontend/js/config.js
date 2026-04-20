@@ -1,3 +1,3 @@
-//config.js
-
-export const API_BASE = "http://localhost:3000";
+// /frontend/config.js
+export const API_BASE =
+  location.hostname === "localhost" ? "http://localhost:3000" : "";
