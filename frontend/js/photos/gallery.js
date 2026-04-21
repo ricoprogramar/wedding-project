@@ -1,4 +1,11 @@
-import { API_BASE } from "../config.js";
+// import { API_BASE } from "../config.js";
+
+
+const API_BASE =
+  location.hostname === "127.0.0.1" ? "http://127.0.0.1:3000" : "";
+
+fetch(`${API_BASE}/api/memories/list`);
+
 
 /* =========================
    DOM
