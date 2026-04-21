@@ -163,7 +163,7 @@ saveBtn.onclick = async () => {
   saveBtn.textContent = "Guardando...";
 
   try {
-    const res = await fetch("http://localhost:3000/api/invitation", {
+    const res = await fetch("/api/invitation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ invitations }),
@@ -194,14 +194,14 @@ saveBtn.onclick = async () => {
 
       tr.querySelector(".link").onclick = () => {
         navigator.clipboard.writeText(link);
-        status.textContent = "✅ Link copiado al portapapeles";
+        status.textContent = "Link copiado al portapapeles";
         status.style.color = "green";
       };
 
       result.appendChild(tr);
     });
 
-    status.textContent = `✅ ${data.created} invitaciones creadas correctamente`;
+    status.textContent = `${data.created} invitaciones creadas correctamente`;
     status.style.color = "green";
 
     // Reset formulario

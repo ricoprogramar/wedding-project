@@ -1,7 +1,7 @@
 import { API_BASE } from "../config.js";
 import "./guard.js";
 
-// ✅ Función reutilizable para cargar invitaciones
+// Función reutilizable para cargar invitaciones
 async function loadInvitations() {
   const tableBody = document.getElementById("invitationsTableBody");
   if (!tableBody) return;
@@ -119,7 +119,7 @@ async function loadInvitations() {
 
           const confirmed = confirm(message);
 
-          // ❌ Si cancela, volver al estado anterior
+          // Si cancela, volver al estado anterior
           if (!confirmed) {
             checkbox.checked = prevState;
             return;
@@ -139,7 +139,7 @@ async function loadInvitations() {
               throw new Error("Error en backend");
             }
           } catch (error) {
-            alert("❌ No se pudo actualizar el estado de la invitación");
+            alert("No se pudo actualizar el estado de la invitación");
             checkbox.checked = prevState; // rollback visual
           }
         },
