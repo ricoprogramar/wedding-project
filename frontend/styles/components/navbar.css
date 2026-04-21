@@ -97,7 +97,38 @@
   }
 
   /* 🔑 MENÚ MOBILE CORRECTO */
-  .navbar__menu {
+  
+.navbar__menu {
+    position: fixed;
+
+    /* 👉 CONFIGURA AQUÍ */
+    width: 50vw;         /* ancho del menú */
+    max-width: 320px;    /* límite máximo */
+    height: 40vh;        /* alto del menú */
+    max-height: 500px;   /* límite de alto */
+
+    top: 60px;           /* debajo del navbar */
+    right: 16px;         /* separación del borde */
+
+    background: #111;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    /* ✅ oculto fuera del viewport */
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+
+    z-index: 1500;
+
+    /* sombra elegante */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  /* .navbar__menu {
     position: fixed;
     inset: 0;
     width: 100vw;
@@ -114,7 +145,7 @@
     transition: transform 0.3s ease;
 
     z-index: 1500;
-  }
+  } */
 
   .navbar__menu.active {
     transform: translateX(0);
