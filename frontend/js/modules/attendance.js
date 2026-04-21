@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (res.status === 204) {
       const modal1 = modalContainer.querySelector("#confirmationModal");
       renderGuests(modal1.querySelector("#guestList"));
+      fillNameAutocomplete(); 
       modal1.style.display = "flex";
       return;
     }
@@ -97,6 +98,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       await showFinalConfirmation();
     }
   });
+
+  /* ================================
+   * AUTO COMPLETADO DEL NOMBRE
+   ================================= */
+
+  function fillNameAutocomplete() {
+    const datalist = modalContainer.querySelector("#guestNames");
+    if (!datalist) return;
+
+    const guests = [invitation.mainGuest, ...invitation.companions];
+
+    datalist.innerHTML = "";
+    guests.forEach((name) => {
+      const option = document.createElement("option");
+      option.value = name;
+      datalist.appendChild(option);
+    });
+  }
 
   /* ================================
    * MODAL 1 → REVIEW

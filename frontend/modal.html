@@ -15,7 +15,16 @@
     <form id="attendanceForm">
       <div class="form-group">
         <label for="confirmName">Tu nombre completo:</label>
-        <input type="text" id="confirmName" name="confirmName" required />
+        <!-- <input type="text" id="confirmName" name="confirmName" required /> -->
+        <input
+          id="confirmName"
+          type="text"
+          list="guestNames"
+          placeholder="Empieza a escribir tu nombre"
+        />
+
+        <datalist id="guestNames"></datalist>
+
         <small class="input-error" style="display: none; color: red">
           Escribe tu nombre como está en la invitación
         </small>
@@ -66,8 +75,7 @@
 <!-- ============================= -->
 <div id="confirmationMessage" class="modal" style="display: none">
   <div class="modal__content">
-    
-    <h2 class="modal-title"> Asistencia confirmada</h2>
+    <h2 class="modal-title">Asistencia confirmada</h2>
 
     <p class="modal-subtitle">
       Tu asistencia ha sido registrada correctamente.
@@ -75,9 +83,7 @@
 
     <div class="confirmation-summary">
       <ul id="finalGuestList" class="guest-list">
-        
         <p><strong>Asistentes confirmados:</strong></p>
-
       </ul>
 
       <p class="table-info">
