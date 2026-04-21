@@ -1,18 +1,19 @@
 // src/features/admin/admin.routes.js
 import express from "express";
 
-import {    
-    createInvitationsBulk, 
-    getInvitationByToken,
-    listInvitations,
-    getInvitationById,
-    updateInvitationTable,
-    updateInvitationActive
+import {
+  createInvitationsBulk,
+  getInvitationByToken,
+  listInvitations,
+  getInvitationById,
+  updateInvitationTable,
+  updateInvitationActive,
+  deleteInvitation,
 } from "./invitation.admin.controller.js";
 
 const router = express.Router();
 
-//Enpoint de login
+// LOGIN
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -23,19 +24,22 @@ router.post("/login", (req, res) => {
   return res.sendStatus(401);
 });
 
-// 🔹 1. LISTA primero
+// LISTAR
 router.get("/", listInvitations);
 
+// EDITAR
 router.get("/edit/:id", getInvitationById);
-
 router.put("/edit/:id/table", updateInvitationTable);
-
 router.put("/edit/:id/active", updateInvitationActive);
 
-// 🔹 2. TOKEN después
-router.get("/:token", getInvitationByToken);
+// ELIMINAR
+router.delete("/:id", deleteInvitation);
 
-// 🔹 3. POST
+// CREAR
 router.post("/", createInvitationsBulk);
 
+// SIEMPRE AL FINAL
+router.get("/:token", getInvitationByToken);
+
 export default router;
+

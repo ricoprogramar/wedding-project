@@ -1,5 +1,5 @@
-import { API_BASE } from "../config.js";
 import "./guard.js";
+import { API_BASE } from "../config.js";
 
 // Función reutilizable para cargar invitaciones
 async function loadInvitations() {
@@ -96,11 +96,20 @@ async function loadInvitations() {
 
         <td>
           <button
-            class="icon-button edit-invitation"
+            class="btn-icon btn-icon--md edit-invitation"
             title="Editar invitación"
             data-id="${invitation.id}">
-            ✏️
+            <i data-lucide="pencil"></i>
           </button>
+
+          
+        <button
+          class="btn-icon btn-icon--md btn-delete"
+          title="Eliminar"
+          data-id="${invitation.id}">
+          <i data-lucide="trash-2"></i>
+        </button>
+
         </td>
       `;
 
@@ -158,6 +167,9 @@ async function loadInvitations() {
 
       tableBody.appendChild(tr);
     });
+
+    lucide.createIcons(); //Esta línea hace visible el ícono de eliminar
+
   } catch (error) {
     console.error(error);
     tableBody.innerHTML = `
@@ -216,4 +228,28 @@ function showToast(message, duration = 1500) {
 // lógica logout ir atrás
 document.getElementById("btnLogout")?.addEventListener("click", () => {  
   window.location.href = "/admin/index.html";
+});
+
+//Eliminar invitación
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".btn-delete");
+  if (!btn) return;
+
+  const id = btn.dataset.id;
+
+  const ok = confirm(
+    "¿Eliminar esta invitación?\n\nEsta acción no se puede deshacer.",
+  );
+
+  if (!ok) return;
+
+  const res = await fetch(`${API_BASE}/api/invitation/${id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    btn.closest("tr").remove();
+  } else {
+    alert("Error eliminando invitación");
+  }
 });

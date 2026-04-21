@@ -114,11 +114,31 @@
 
 /* ===== FIX REAL LUCIDE ===== */
 .btn-icon svg {
-  width: 40px !important;
-  height: 40px !important;
+  width: 40px ;
+  height: 40px ;
   stroke-width: 2.5;
   fill: none;
 }
+/* Íconos pequeños (tablas, admin) */
+.btn-icon--sm svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+/* Íconos medianos (por defecto) */
+.btn-icon--md svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Íconos grandes (acciones principales) */
+.btn-icon--lg svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2.5;
+}
+
 
 /* Color blanco por defecto */
 .btn-icon {

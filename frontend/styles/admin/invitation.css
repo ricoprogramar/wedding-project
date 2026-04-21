@@ -178,3 +178,25 @@ body {
 .status-toggle input:checked + .toggle-ui::before {
   transform: translateX(20px);
 }
+
+
+.invitation-actions {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+}
+
+.btn-delete {
+  color: #b00020;
+}
+
+.btn-delete:hover {
+  box-shadow: 0 0 12px rgba(176, 0, 32, 0.6);
+  border-color: #b00020;
+}
+
+
+.admin-table td .btn-icon {
+  margin-inline: 0.7rem;
+}
+

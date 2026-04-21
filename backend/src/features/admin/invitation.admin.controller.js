@@ -336,3 +336,31 @@ export async function updateInvitationActive(req, res) {
 import crypto from "crypto";
 
 // ================================
+
+// Eliminar invitación (ADMIN)
+export async function deleteInvitation(req, res) {
+  const { id } = req.params;
+
+  try {
+    // 🔑 Primero eliminamos asistentes relacionados (si aplica)
+    await pool.query(
+      "DELETE FROM attendance WHERE invitation_id = $1",
+      [id]
+    );
+
+    // 🔑 Luego eliminamos la invitación
+    const result = await pool.query(
+      "DELETE FROM invitations WHERE id = $1",
+      [id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Invitación no encontrada" });
+    }
+
+    return res.json({ ok: true });
+  } catch (error) {
+    console.error("ERROR DELETE INVITATION:", error);
+    return res.status(500).json({ error: "Error eliminando invitación" });
+  }
+}
