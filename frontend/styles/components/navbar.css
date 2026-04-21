@@ -104,14 +104,14 @@
     /* 👉 CONFIGURA AQUÍ */
     width: 50vw;         /* ancho del menú */
     max-width: 320px;    /* límite máximo */
-    height: 60vh;        /* alto del menú */
+    height: 48vh;        /* alto del menú */
     max-height: 500px;   /* límite de alto */
 
     top: 60px;           /* debajo del navbar */
     right: 16px;         /* separación del borde */
 
     background: #111;
-    border-radius: 16px;
+    border-radius: 6px;
     padding: 2rem 1.5rem;
 
     display: flex;
@@ -126,26 +126,8 @@
 
     /* sombra elegante */
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
-
-  /* .navbar__menu {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-
-    background: #111;
-
-    display: flex;
-    flex-direction: column;
-    padding: 5rem 1.5rem;
-    gap: 1.5rem;
-
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-
-    z-index: 1500;
-  } */
 
   .navbar__menu.active {
     transform: translateX(0);
