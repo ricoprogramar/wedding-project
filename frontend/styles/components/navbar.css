@@ -104,7 +104,7 @@
     /* 👉 CONFIGURA AQUÍ */
     width: 50vw;         /* ancho del menú */
     max-width: 320px;    /* límite máximo */
-    height: 40vh;        /* alto del menú */
+    height: 60vh;        /* alto del menú */
     max-height: 500px;   /* límite de alto */
 
     top: 60px;           /* debajo del navbar */
