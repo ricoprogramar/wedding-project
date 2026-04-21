@@ -31,7 +31,12 @@ const viewerVideo = document.getElementById("viewer-video");
 let page = 1;
 let pageSize = parseInt(itemsSelect.value, 10);
 let totalPages = 1;
-let allItems = []; // ✅ TODOS los recuerdos visibles
+// let allItems = []; //TODOS los recuerdos visibles
+
+allItems = json.data ?? [];
+window.allItems = allItems; // SOLO para depuración
+updatePage(1);
+
 
 closeBtn?.addEventListener("click", closeViewer);
 
