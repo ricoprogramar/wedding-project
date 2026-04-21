@@ -128,7 +128,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nameInput = modal1.querySelector("#confirmName");
     const error = modal1.querySelector(".input-error");
 
-    if (nameInput.value.trim() !== invitation.mainGuest) {
+    if (
+      normalizeName(nameInput.value) !== normalizeName(invitation.mainGuest)
+        ) {
       error.textContent = `Escribe tu nombre como aparece en la invitación: ${invitation.mainGuest}`;
       error.style.display = "block";
       return;
@@ -276,4 +278,14 @@ function showInactiveInvitation() {
   `;
 
   document.querySelector(".confirm-container")?.appendChild(msg);
+}
+
+// Función utilitaria
+function normalizeName(value) {
+  return value
+    .normalize("NFD") // separa letras y tildes
+    .replace(/[\u0300-\u036f]/g, "") // elimina tildes
+    .toLowerCase() // ignora mayúsculas
+    .replace(/\s+/g, " ") // espacios múltiples → uno
+    .trim();
 }
