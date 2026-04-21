@@ -84,5 +84,5 @@ export function initHeroCarousel() {
     }, 300);
   }
 
-  show(); // ✅ arranca SIEMPRE con video
+  show(); // arranca SIEMPRE con video
 }

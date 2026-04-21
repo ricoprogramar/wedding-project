@@ -7,6 +7,6 @@ export function initBackNavigation() {
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    navigateWithToken("/frontend/index.html#vestimenta");
+    navigateWithToken("/index.html#vestimenta");
   });
 }

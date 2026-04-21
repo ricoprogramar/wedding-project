@@ -53,18 +53,6 @@ export function initAudioManager() {
     localStorage.setItem("music_volume", volumeInput.value);
   });
 
-  //   // ===== Restaurar estado =====
-  //   if (savedEnabled) {
-  //     // Solo intenta reproducir tras interacción previa del usuario
-  //     document.addEventListener(
-  //       "click",
-  //       () => {
-  //         playMusic();
-  //       },
-  //       { once: true },
-  //     );
-  //   }
-
   // ===== Restaurar estado guardado =====
   if (savedEnabled) {
     // Esperar la primera interacción del usuario

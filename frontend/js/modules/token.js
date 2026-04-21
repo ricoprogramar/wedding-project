@@ -1,37 +1,3 @@
-// // Manejo del estado global del token
-// // frontend/js/modules/token.js
-
-// export function getToken() {
-//   return (
-//     new URLSearchParams(window.location.search).get("token") ||
-//     sessionStorage.getItem("invitation_token")
-//   );
-// }
-
-// export function persistToken() {
-//   const token = getToken();
-//   if (!token) return;
-
-//   sessionStorage.setItem("invitation_token", token);
-// }
-
-// export function attachTokenToInternalLinks() {
-//   const token = getToken();
-//   if (!token) return;
-
-//   document.querySelectorAll("a[href]").forEach((link) => {
-//     const url = new URL(link.href, window.location.origin);
-
-//     // solo enlaces internos
-//     if (url.origin !== window.location.origin) return;
-
-//     if (!url.searchParams.get("token")) {
-//       url.searchParams.set("token", token);
-//       link.href = url.toString();
-//     }
-//   });
-// }
-
 // frontend/js/modules/token.js
 // FIX: navegación interna preservando token global
 

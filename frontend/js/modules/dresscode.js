@@ -7,6 +7,6 @@ export function initDresscodeNavigation() {
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    navigateWithToken("/frontend/dresscode-detail.html");
+    navigateWithToken("/dresscode-detail.html");
   });
 }
