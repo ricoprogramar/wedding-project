@@ -136,19 +136,34 @@ function updatePage(newPage) {
 /* =========================
    Cargar datos
 ========================= */
+
 // async function loadGallery() {
 //   const res = await fetch(`${API_BASE}/api/memories/list`);
-//   allItems = await res.json(); // ✅ array plano del backend
+//   const json = await res.json();
+
+//   allItems = json.data; // ← FIX clave
 //   updatePage(1);
 // }
 
 async function loadGallery() {
   const res = await fetch(`${API_BASE}/api/memories/list`);
-  const json = await res.json();
 
-  allItems = json.data; // ← FIX clave
+  if (!res.ok) {
+    throw new Error("Error HTTP " + res.status);
+  }
+
+  const contentType = res.headers.get("content-type");
+  if (!contentType?.includes("application/json")) {
+    const text = await res.text();
+    console.error("RESPUESTA NO JSON:", text);
+    return;
+  }
+
+  const json = await res.json();
+  allItems = json.data ?? [];
   updatePage(1);
 }
+
 
 /* =========================
    Eventos
