@@ -69,26 +69,6 @@
   margin-bottom: 0.75rem;
 }
 
-/* ================= Form ================= */
-.field {
-  margin-bottom: 0.75rem;
-}
-
-.field label {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
-
-.field input,
-.field select {
-  width: 100%;
-  padding: 0.45rem 0.5rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-text);
-}
-
 /* ================= Acompañantes ================= */
 .companions {
   margin-top: 0.75rem;
@@ -212,6 +192,4 @@
   font-weight: var(--font-weight-bold);
   font-size: 1.25rem;
 }
-  
-
 }

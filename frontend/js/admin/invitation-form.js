@@ -21,10 +21,17 @@ function updateInvitationTitles() {
 function createCompanionRow(list) {
   const row = document.createElement("div");
   row.className = "row";
+
   row.innerHTML = `
-    <input placeholder="Nombre del acompañante" />
-    <button type="button" class="danger" aria-label="Eliminar acompañante">❌</button>
-  `;
+  <input placeholder="Nombre del acompañante" />
+  <button
+    type="button"
+    class="btn-icon btn-icon--sm btn-delete"
+    aria-label="Eliminar acompañante"
+  >
+    <i data-lucide="trash-2"></i>
+  </button>
+`;
 
   row.querySelector("button").onclick = () => {
     row.remove();
@@ -35,6 +42,7 @@ function createCompanionRow(list) {
   };
 
   list.appendChild(row);
+  lucide.createIcons();
 }
 
 // ================================
@@ -59,31 +67,30 @@ function createInvitationBlock() {
       <input class="table" placeholder="Ej: Mesa 3, Mesa 12..." />
     </div>
 
-    
-<div class="companions">
-  <strong>
-    Acompañantes (<span class="companion-count">0</span>)
-  </strong>
+        
+    <div class="companions field">
+      <strong>
+        Acompañantes (<span class="companion-count">0</span>)
+      </strong>
 
-  <div class="companionList"></div>
+      <div class="companionList"></div>
 
-  <div class="invitation-actions">
-    <button
-      type="button"
-      class="btn btn--danger removeInvitation"
-    >
-      Eliminar invitación
-    </button>
+      <div class="invitation-actions">
+        <button
+          type="button"
+          class="btn btn--danger removeInvitation"
+        >
+          Eliminar invitación
+        </button>
 
-    <button
-      type="button"
-      class="btn btn--primary-green addCompanion"
-    >
-      + Agregar acompañante
-    </button>
-  </div>
-</div>
-
+        <button
+          type="button"
+          class="btn btn--primary-green addCompanion"
+        >
+          + Agregar acompañante
+        </button>
+      </div>
+    </div>
   `;
 
   const companionList = div.querySelector(".companionList");
@@ -119,12 +126,10 @@ document.getElementById("cancelCreate")?.addEventListener("click", () => {
   history.back();
 });
 
-
 // CANCELAR / VOLVER sin guardar
 document.getElementById("btnBack")?.addEventListener("click", () => {
   history.back();
 });
-
 
 // ================================
 // Guardar invitaciones
@@ -180,7 +185,6 @@ saveBtn.onclick = async () => {
     result.innerHTML = "";
 
     data.invitations.forEach((i, index) => {
-    
       const link = `${location.origin}/index.html?token=${i.token}`;
 
       const tr = document.createElement("tr");

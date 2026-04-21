@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="/styles/admin/invitation-form.css" />
     <link rel="stylesheet" href="/styles/admin/admin-form.css" />
     <link rel="stylesheet" href="/styles/components/buttons.css" />
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/js/ui/icons.js"></script>
   </head>
 
   <body>
@@ -15,8 +18,10 @@
     <!-- Header -->
     <!-- ============================= -->
     <header class="admin-header">
-      <button id="btnBack" class="btn-back" type="button">← Volver</button>
-
+      <!-- <button id="btnBack" class="btn-back" type="button">← Volver</button> -->
+      <button class="btn-icon" data-back>
+        <i data-lucide="arrow-left"></i>
+      </button>
       <h1>Crear Invitaciones</h1>
     </header>
 
