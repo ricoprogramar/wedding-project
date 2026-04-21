@@ -1,6 +1,3 @@
-
-
-
 // src/js/admin/memories-moderation.js
 import "./guard.js";
 import { API_BASE } from "../config.js";
@@ -133,7 +130,7 @@ function renderMemories(memories) {
         card.classList.remove("is-selected");
       }
 
-      updateSelectionMode(); // ✅ CLAVE
+      updateSelectionMode(); // CLAVE
       updateActionsState();
     });
 
@@ -169,7 +166,7 @@ function renderMemories(memories) {
     list.appendChild(card);
   });
 
-  updateSelectionMode(); // ✅ tras cada render
+  updateSelectionMode(); // tras cada render
   updateActionsState();
 }
 

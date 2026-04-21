@@ -45,7 +45,7 @@ async function loadInvitations() {
         ? `<span class="status confirmed">Confirmó</span>`
         : `<span class="status pending">Pendiente</span>`;
 
-      const link = `${window.location.origin}/frontend/index.html?token=${invitation.token}`;
+      const link = `${window.location.origin}/index.html?token=${invitation.token}`;
 
       tr.innerHTML = `
         <td>${index + 1}</td>
@@ -153,7 +153,7 @@ async function loadInvitations() {
 
       // Ir a editar
       tr.querySelector(".edit-invitation").addEventListener("click", () => {
-        window.location.href = `/frontend/admin/invitation/edit-invitation.html?id=${invitation.id}`;
+        window.location.href = `/admin/invitation/edit-invitation.html?id=${invitation.id}`;
       });
 
       tableBody.appendChild(tr);
@@ -178,7 +178,7 @@ window.addEventListener("pageshow", () => {
   document
     .getElementById("btnCreateInvitation")
     ?.addEventListener("click", () => {
-      window.location.href = "/frontend/admin/invitation/invitation-form.html";
+      window.location.href = "/admin/invitation/invitation-form.html";
     });
 });
 
@@ -215,5 +215,5 @@ function showToast(message, duration = 1500) {
 
 // lógica logout ir atrás
 document.getElementById("btnLogout")?.addEventListener("click", () => {  
-  window.location.href = "/frontend/admin/index.html";
+  window.location.href = "/admin/index.html";
 });

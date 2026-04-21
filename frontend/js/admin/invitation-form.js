@@ -181,7 +181,7 @@ saveBtn.onclick = async () => {
 
     data.invitations.forEach((i, index) => {
     
-      const link = `${location.origin}/frontend/index.html?token=${i.token}`;
+      const link = `${location.origin}/index.html?token=${i.token}`;
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
