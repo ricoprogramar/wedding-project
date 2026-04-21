@@ -1,11 +1,7 @@
 // import { API_BASE } from "../config.js";
 
-
 const API_BASE =
   location.hostname === "127.0.0.1" ? "http://127.0.0.1:3000" : "";
-
-fetch(`${API_BASE}/api/memories/list`);
-
 
 /* =========================
    DOM
@@ -14,7 +10,8 @@ const list = document.getElementById("list");
 
 const countText = document.querySelector(".pagination__count");
 const pageInput = document.getElementById("currentPage");
-const pageTotalText = pageInput?.nextElementSibling;
+// const pageTotalText = pageInput?.nextElementSibling;
+const pageTotalText = document.querySelector(".pagination__page span");
 
 const btnFirst = document.querySelector('[data-page="first"]');
 const btnPrev = document.querySelector('[data-page="prev"]');
@@ -124,8 +121,13 @@ function updatePage(newPage) {
 
   countText.innerHTML = `Mostrando <strong>${start + 1}–${Math.min(end, allItems.length)}</strong> de <strong>${allItems.length}</strong> recuerdos`;
 
+  // pageInput.value = page;
+  // pageTotalText.textContent = `de ${totalPages}`;
+
   pageInput.value = page;
-  pageTotalText.textContent = `de ${totalPages}`;
+  if (pageTotalText) {
+    pageTotalText.textContent = `de ${totalPages}`;
+  }
 
   btnFirst.disabled = page === 1;
   btnPrev.disabled = page === 1;
@@ -136,14 +138,6 @@ function updatePage(newPage) {
 /* =========================
    Cargar datos
 ========================= */
-
-// async function loadGallery() {
-//   const res = await fetch(`${API_BASE}/api/memories/list`);
-//   const json = await res.json();
-
-//   allItems = json.data; // ← FIX clave
-//   updatePage(1);
-// }
 
 async function loadGallery() {
   const res = await fetch(`${API_BASE}/api/memories/list`);
@@ -163,7 +157,6 @@ async function loadGallery() {
   allItems = json.data ?? [];
   updatePage(1);
 }
-
 
 /* =========================
    Eventos
