@@ -1,34 +1,30 @@
+/* =========================
+   Navbar base
+========================= */
 .navbar {
-  border-bottom: 1px solid var(--color-border);
-  /* position: fixed;
+
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%; */
+  right: 0;
 
-  position: sticky;
-  top: 0;
   z-index: 1000;
-
-    /* fondo semi-transparente */
   background: rgba(17, 17, 17, 0.9);
-
-  /* efecto blur */
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* soporte Safari */
+  -webkit-backdrop-filter: blur(10px);
 
-  /* borde sutil para separación */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-  /* opcional: mejora visual */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 
-
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 
 .navbar__container {
   max-width: 1200px;
   margin: auto;
   padding: 1rem;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,6 +35,9 @@
   font-size: 1.8rem;
 }
 
+/* =========================
+   Menu (desktop)
+========================= */
 .navbar__menu {
   display: flex;
   gap: 1.5rem;
@@ -48,13 +47,37 @@
   text-decoration: none;
   color: var(--color-text-muted);
   transition: color 0.2s;
+  position: relative;
 }
 
 .navbar__link:hover {
   color: var(--color-text);
 }
 
-/* Botón hamburguesa oculto en desktop */
+/* indicador activo */
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+
+.navbar__link.is-active::after {
+  transform: scaleX(1);
+}
+
+.navbar__link.is-active {
+  color: var(--color-text);
+}
+
+/* =========================
+   Botón hamburguesa
+========================= */
 .navbar__toggle {
   display: none;
   font-size: 1.8rem;
@@ -63,43 +86,38 @@
   color: white;
 }
 
-@media (width < 1024px) {
-    
-    .navbar__cta {
-    display: none;
-  }
-
-}
-
-/* ========================= */
-/* Mobile */
-/* ========================= */
+/* =========================
+   Mobile
+========================= */
 @media (max-width: 767px) {
 
+  /* 🔑 BOTÓN hamburguesa dentro del navbar */
+  .navbar__toggle {
+    display: block;
+  }
+
+  /* 🔑 MENÚ MOBILE CORRECTO */
   .navbar__menu {
     position: fixed;
-    top: 0;
-    right: -100%;
-    height: 50vh;
-    width: 50%;              /* 🔑 ya no ocupa toda la pantalla */
-    max-width: 300px;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
 
     background: #111;
 
     display: flex;
     flex-direction: column;
     padding: 5rem 1.5rem;
-    gap: 1.2rem;
+    gap: 1.5rem;
 
-    transition: right 0.3s ease;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+
+    z-index: 1500;
   }
 
   .navbar__menu.active {
-    right: 0;
-  }
-
-  .navbar__toggle {
-    display: block;
+    transform: translateX(0);
   }
 
   .navbar__cta {
@@ -107,76 +125,28 @@
   }
 }
 
-/* 🔑 Bloqueo de scroll cuando menú está abierto */
+/* =========================
+   Lock scroll when open
+========================= */
 body.menu-open {
   overflow: hidden;
 }
 
-/* ========================= */
-/* Mobile */
-/* ========================= */
-@media (max-width: 767px) {
-  .navbar__toggle {
-    position: fixed;   /* lo desacopla del navbar */
-    bottom: 10px;
-    right: 20px;
-
-    z-index: 2000;
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 30%;
-    background: var(--color-primary);
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 1.5rem;
-
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  }
+/* =========================
+   Protección extra (opcional)
+========================= */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* =========================
-   Nav link activo
+   Navbar hide/show on scroll
 ========================= */
 
-.navbar__link {
-  position: relative;
+.navbar.navbar--hidden {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
-.navbar__link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px;
-
-  height: 2px; /* barrita delgada */
-  background: var(--color-primary);
-
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.25s ease;
-}
-
-/* Estado activo */
-.navbar__link.is-active::after {
-  transform: scaleX(1);
-}
-
-/* Opcional: reforzar color del link activo */
-.navbar__link.is-active {
-  color: var(--color-text);
-}
-
-.navbar__link {
-  position: relative; /* necesario para el ::after */
-}
-
-.navbar__link::after {
-  content: "";
-}
