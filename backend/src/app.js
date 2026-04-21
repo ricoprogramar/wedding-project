@@ -7,7 +7,13 @@ import attendanceRoutes from "./features/attendance/attendance.routes.js";
 import adminRoutes from "./features/admin/admin.routes.js";
 import memoriesRoutes from "./features/memories/memories.routes.js";
 import dotenv from "dotenv";
-dotenv.config();
+
+// dotenv.config();
+
+dotenv.config({
+  path: path.resolve(process.cwd(), "backend/.env"),
+});
+
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -50,17 +56,5 @@ app.use("/api/memories", memoriesRoutes);
 app.use(express.static(path.join(__dirname, "../../frontend")));
 
 app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
-
-// // STATIC DEFINITIVO (sirve todo uploads)
-// app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
-
-// app.use(
-//   "/uploads",
-//   express.static(path.resolve(process.cwd(), "uploads"), {
-//     etag: false,
-//     lastModified: false,
-//     maxAge: 0,
-//   }),
-// );
 
 export default app;
