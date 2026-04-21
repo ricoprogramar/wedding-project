@@ -97,7 +97,7 @@ export function initNavbar() {
 
       if (clicks === 5) {
         clicks = 0;
-        window.location.href = "/frontend/admin/login.html";
+        window.location.href = "/admin/login.html";
       }
     });
   }
