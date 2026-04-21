@@ -1,3 +1,3 @@
 if (sessionStorage.getItem("admin_auth") !== "true") {
-  window.location.href = "/admin/login.html";
+  window.location.href = "/admin/index.html";
 }
